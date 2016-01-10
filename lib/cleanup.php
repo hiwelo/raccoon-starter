@@ -48,6 +48,11 @@ class CleanUp
         add_filter('login_headertitle', array(__CLASS__, 'raccoon_login_title'));
 
         /*
+         * wp_head() cleanups
+         */
+        self::head_cleanup();
+
+        /*
          * miscellaneous cleanups
          */
         add_action('init', array(__CLASS__, 'remove_l10n'));
@@ -281,5 +286,53 @@ class CleanUp
         if (!is_admin()) {
             wp_deregister_script('l10n');
         }
+    }
+
+    /**
+     * WordPress head meta cleanup
+     * @return void
+     */
+    private function head_cleanup()
+    {
+        // remove cat feeds
+        remove_action('wp_head', 'feed_links_extra', 3);
+
+        // remove post & comments feeds
+        // remove_action('wp_head', 'feed_links', 2);
+
+        // EditURI link
+        remove_action('wp_head', 'rsd_link');
+
+        // window live writer
+        remove_action('wp_head', 'wlwmanifest_link');
+
+        // previous link
+        remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+
+        // start link
+        remove_action('wp_head', 'start_post_rel_link', 10, 0);
+
+        // link for adjacent posts
+        remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+        // WordPress version
+        remove_action('wp_head', 'wp_generator');
+
+        // remove WP version from CSS & scripts
+        add_filter('style_loader_src', [__CLASS__, 'remove_wordpress_version_css_js'], 10);
+        add_filter('script_loader_src', [__CLASS__, 'remove_wordpress_version_css_js'], 10);
+    }
+
+    /**
+     * Remove WordPress version from CSS & Scripts
+     * @param  string $src css & script url
+     * @return string
+     */
+    function remove_wordpress_version_css_js($src)
+    {
+        if (strpos($src, 'ver=')) {
+            $src = remove_query_arg('ver', $src);
+        }
+        return $src;
     }
 }
