@@ -34,3 +34,27 @@ Core::load_libraries($libraries);
  */
 locate_template('lib/_actions.php', true, true);
 locate_template('lib/_filters.php', true, true);
+
+/*
+ * We load custom post types and custom taxonomies facilities
+ */
+locate_template('lib/custom-post-type.php', true, true);
+
+/*
+ * We declare new custom post types or custom taxonomies
+ */
+// $book_args = [
+//     'post_type_name' => 'book',
+//     'singular' => 'Book',
+//     'plural' => 'Books',
+//     'slug' => 'books',
+// ];
+// $book_supports = ['title', 'editor', 'thumbnail', 'comments'];
+// $books = new CustomTypes\CustomPostType($book_args, $book_supports);
+// // $books->register_taxonomy('genres');
+// $books->register_taxonomy([
+//     'taxonomy_name' => 'genre',
+//     'singular' => 'Genre',
+//     'plural' => 'Genres',
+//     'slug' => 'genre',
+// ]);
