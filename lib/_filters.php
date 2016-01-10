@@ -13,11 +13,19 @@ namespace Hwlo\Raccoon;
  * Extra filters
  * ------------- */
 
-$className = __NAMESPACE__ . '\\Extras\Extras';
-$class = new $className();
+$class = __NAMESPACE__ . '\\Extras\Extras';
 
 // this function add <body> some classes
-add_filter('body_class', array($class, 'body_class'));
+add_filter('body_class', [$class, 'body_class']);
 
 // change the excerpt read more message
-add_filter('excerpt_more', array($class, 'excerpt_more'));
+add_filter('excerpt_more', [$class, 'excerpt_more']);
+
+
+/* ----------------
+ * Template filters
+ * ---------------- */
+
+$class = __NAMESPACE__ . '\\Template\Template';
+
+add_filter('template_include', [$class, 'wrap'], 109);

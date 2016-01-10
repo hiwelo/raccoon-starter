@@ -13,30 +13,27 @@ namespace Hwlo\Raccoon;
  * Setup actions
  * ------------- */
 
-$className = __NAMESPACE__ . '\\Setup\Setup';
-$class = new $className();
+$class = __NAMESPACE__ . '\\Setup\Setup';
 
 // this function run all theme setup instruction
-add_action('after_setup_theme', array($class, 'init'));
+add_action('after_setup_theme', [$class, 'init']);
 
 
 /* ---------------
  * Cleanup actions
  * --------------- */
 
-$className = __NAMESPACE__ . '\\CleanUp\CleanUp';
-$class = new $className();
+$class = __NAMESPACE__ . '\\CleanUp\CleanUp';
 
 // this function cleans basic WordPress theme components
-add_action('after_setup_theme', array($class, 'init'));
+add_action('after_setup_theme', [$class, 'init']);
 
 
 /* ---------------
  * Jetpack actions
  * --------------- */
 
-$className = __NAMESPACE__ . '\\Jetpack\Jetpack';
-$class = new $className();
+$class = __NAMESPACE__ . '\\Jetpack\Jetpack';
 
 // this function cleans basic WordPress theme components
-add_action('after_setup_theme', array($class, 'setup'));
+add_action('after_setup_theme', [$class, 'setup']);
