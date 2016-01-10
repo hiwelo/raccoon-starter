@@ -20,7 +20,6 @@ $libraries = [
     'lib/setup.php',
     'lib/extras.php',
     'lib/jetpack.php',
-    'lib/template.php',
     'lib/titles.php',
 ];
 

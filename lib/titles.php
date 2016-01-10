@@ -23,7 +23,6 @@ class Titles
     static function content()
     {
         global $theme;
-        var_dump($theme);
 
         if (is_home()) {
             if (get_option('page_for_posts', true)) {
