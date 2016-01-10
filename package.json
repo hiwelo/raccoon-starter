@@ -8,7 +8,8 @@
     "build": "npm install --prefix assets/ && npm run gulpfile-update && gulp",
     "jshint": "gulp jshint",
     "vendor-update": "npm update --prefix assets/",
-    "gulpfile-update": "babel gulpfile.babel.js --out-file gulpfile.js"
+    "gulpfile-update": "babel gulpfile.babel.js --out-file gulpfile.js",
+    "phpcs": "phpcs --standard=ruleset.xml --extensions=php -n -s ."
   },
   "repository": {
     "type": "git",
