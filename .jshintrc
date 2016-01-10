@@ -1,5 +1,7 @@
 {
+  "bitwise": true,
   "browser": true,
+  "curly": true,
   "node": true,
   "jquery": true,
   "esnext": true,
