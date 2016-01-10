@@ -21,6 +21,7 @@ $libraries = [
     'lib/extras.php',
     'lib/jetpack.php',
     'lib/titles.php',
+    'lib/posts.php',
     'lib/users.php',
 ];
 
