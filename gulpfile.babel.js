@@ -15,14 +15,14 @@ import browserSync from 'browser-sync';
  * Project configuration
  */
 const project = {
-  name: 'hiwelo\'s portfolio', // project name for gulp-notify
-  url: 'http://hiwelo.local', // project dev url
+  name: 'Raccoon WordPress Theme', // project name for gulp-notify
+  url: 'http://raccoon.local', // project dev url
   preprocessor: {
     css: 'less', // choose 'less' or 'sass'
     js: 'es2015', // choose 'es2015' or another installed babel preset
   },
   sync: {
-    watch: true, // browserSync activation
+    watch: false, // browserSync activation
     proxyMode: true, // browserSync proxy mode (see project.url for the url)
   },
   conf: {
