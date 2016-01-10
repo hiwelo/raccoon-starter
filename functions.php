@@ -11,6 +11,7 @@ $libraries = [
     'lib/cleanup.php',
     'lib/setup.php',
     'lib/extras.php',
+    'lib/jetpack.php',
 ];
 
 /*

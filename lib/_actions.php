@@ -29,3 +29,14 @@ $class = new $className();
 
 // this function cleans basic WordPress theme components
 add_action('after_setup_theme', array($class, 'init'));
+
+
+/* ---------------
+ * Jetpack actions
+ * --------------- */
+
+$className = __NAMESPACE__ . '\\Jetpack\Jetpack';
+$class = new $className();
+
+// this function cleans basic WordPress theme components
+add_action('after_setup_theme', array($class, 'setup'));
