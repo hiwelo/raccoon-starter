@@ -1,0 +1,27 @@
+{
+  "name": "raccoon",
+  "version": "1.0.0",
+  "description": "Raccoon is a personal wordpress starter theme based on NPM, Babel ES-2015, Gulp and Knacss",
+  "main": "../index.php",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiwelo/raccoon.git"
+  },
+  "keywords": [
+    "wordpress",
+    "starter",
+    "theme"
+  ],
+  "author": "Damien Senger <hi@hiwelo.co>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hiwelo/raccoon/issues"
+  },
+  "homepage": "https://github.com/hiwelo/raccoon#readme",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "knacss": "^4.3.6"
+  },
+  "devDependencies": {}
+}
