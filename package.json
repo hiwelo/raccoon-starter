@@ -5,6 +5,8 @@
   "main": "index.php",
   "scripts": {
     "setup": "npm install && npm install --prefix assets/ && npm run gulpfile-update && gulp",
+    "build": "npm install --prefix assets/ && npm run gulpfile-update && gulp",
+    "jshint": "gulp jshint",
     "vendor-update": "npm update --prefix assets/",
     "gulpfile-update": "babel gulpfile.babel.js --out-file gulpfile.js"
   },
@@ -40,6 +42,7 @@
     "gulp-iconfont": "^5.0.1",
     "gulp-iconfont-css": "^2.0.0",
     "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
     "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^1.1.0",
     "gulp-newer": "^1.1.0",
@@ -50,6 +53,8 @@
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-sync": "^0.1.4",
-    "gulp-uglify": "^1.4.2"
+    "gulp-uglify": "^1.4.2",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0"
   }
 }

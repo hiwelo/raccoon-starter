@@ -218,6 +218,21 @@ gulp.task('vendor', () => {
 
 
 /*
+ * Test tasks
+ */
+
+// JSHint task for scripts
+gulp.task('jshint', () => {
+  return gulp.src([
+    paths.src.scripts,
+    paths.root + 'gulpfile.babel.js',
+  ])
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'));
+});
+
+
+/*
  * Production deletion task
  */
 
