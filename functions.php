@@ -1,16 +1,26 @@
 <?php
+
+namespace Hwlo\Raccoon;
+
 /**
  * PHP librairies to include in this file
  * @var array
  */
-$includes = [
+$libraries = [
+    'lib/assets.php',
+    'lib/cleanup.php',
     'lib/setup.php',
+    'lib/extras.php',
 ];
 
-// called librairies inclusion
-foreach ($includes as $file) {
-    locate_template($file, true, true);
-}
+/*
+ * We load the core system and the called libraries through it
+ */
+locate_template('lib/core.php', true, true);
+Core::load_libraries($libraries);
 
-// wordpress theme setup
-add_action('after_setup_theme', Hwlo\Raccoon\Setup\\setup);
+/*
+ * We load actions & filters calls
+ */
+locate_template('lib/_actions.php', true, true);
+locate_template('lib/_filters.php', true, true);
