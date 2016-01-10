@@ -6,6 +6,21 @@ namespace Hwlo\Raccoon\Extras;
 class Extras
 {
     /**
+     * Excerpt length, number of words
+     * @var integer
+     */
+    static $excerpt_length = 30;
+
+    /**
+     * Empty constructor for WordPress add_action or add_filter
+     * @return object
+     */
+    function __construct()
+    {
+        return $this;
+    }
+
+    /**
      * Manage body classes
      * @param  array $classes classes list
      * @return array
@@ -36,5 +51,15 @@ class Extras
         global $theme;
         $text = '&hellip; <a href="' . get_permalink() . '">' . __('En lire plus', $theme['namespace']) . '</a>';
         return $text;
+    }
+
+    /**
+     * Define a new excerpt length
+     * @param  integer $length number of words
+     * @return integer
+     */
+    function custom_excerpt_length($length)
+    {
+        return self::$excerpt_length;
     }
 }

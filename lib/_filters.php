@@ -16,7 +16,9 @@ namespace Hwlo\Raccoon;
 $class = __NAMESPACE__ . '\\Extras\Extras';
 
 // this function add <body> some classes
-add_filter('body_class', [$class, 'body_class']);
+add_filter('body_class', $class . '::body_class');
 
 // change the excerpt read more message
-add_filter('excerpt_more', [$class, 'excerpt_more']);
+add_filter('excerpt_more', $class . '::excerpt_more');
+
+add_filter('excerpt_length', $class . '::custom_excerpt_length');
