@@ -88,16 +88,21 @@ class Core
     /**
      * JS scripts injection in HTML DOM
      * @param  string $file JS scripts list file
+     * @param  bool   $code if true, $file is a JS script and not a file
      * @return void
      * @static
      */
-    public static function injectScripts($file = 'scripts.json')
+    public static function injectScripts($file = 'scripts.json', $code = false)
     {
-        $file = file_get_contents(locate_template($file));
-        $json = json_decode($file);
-        foreach ($json->scripts as $script) {
-            $url = get_bloginfo('template_url') . '/' . $script;
-            $output .= '<script src="' . $url . '"></script>';
+        if ($code === true) {
+            $output = '<script>' . $file . '</script>';
+        } else {
+            $file = file_get_contents(locate_template($file));
+            $json = json_decode($file);
+            foreach ($json->scripts as $script) {
+                $url = get_bloginfo('template_url') . '/' . $script;
+                $output = '<script src="' . $url . '"></script>';
+            }
         }
 
         echo $output;

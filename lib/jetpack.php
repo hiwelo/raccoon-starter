@@ -20,7 +20,7 @@ class Jetpack
      */
     public static function setup()
     {
-        self::infiniteScrollActivation();
+        self::infinite_scroll_activation();
     }
 
     /**

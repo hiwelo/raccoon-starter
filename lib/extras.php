@@ -62,4 +62,14 @@ class Extras
     {
         return self::$excerpt_length;
     }
+
+    /**
+     * JS Detection class (change class='no-js' to class='js')
+     * @return void
+     */
+    public static function js_detection_class()
+    {
+        $script = "(function(r){r.className=r.className.replace(/\bno-js\b/, 'js');})(document.documentElement);";
+        Core::injectScripts($script, true);
+    }
 }

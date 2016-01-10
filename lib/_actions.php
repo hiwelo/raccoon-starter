@@ -37,3 +37,13 @@ $class = __NAMESPACE__ . '\\Jetpack';
 
 // this function cleans basic WordPress theme components
 add_action('after_setup_theme', $class . '::setup');
+
+
+/* -------------
+ * Extra actions
+ * ------------- */
+
+$class = __NAMESPACE__ . '\\Extras';
+
+// this function add a script to test if js is loaded
+add_action('wp_head', $class . '::js_detection_class');
