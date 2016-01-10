@@ -295,7 +295,7 @@ gulp.task('watch', () => {
  * Global tasks
  */
 
-gulp.task('build', gulpSync.sync([project.preprocessor.css, ['css', 'js', 'vendor', 'img', 'fonts']]));
+gulp.task('build', gulpSync.sync([project.preprocessor.css, 'css', 'js', 'vendor', 'img', 'fonts']));
 gulp.task('work', gulpSync.sync(['build', 'watch']));
 gulp.task('prod', gulpSync.sync(['build', 'del-build']));
 gulp.task('clean', ['del-prod']);
