@@ -1,6 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\Assets;
+namespace Hwlo\Raccoon;
 
 
 class Assets

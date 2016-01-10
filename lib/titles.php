@@ -1,6 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\Titles;
+namespace Hwlo\Raccoon;
 
 
 class Titles
@@ -39,5 +39,39 @@ class Titles
         } else {
             return get_the_title();
         }
+    }
+
+    /**
+     * Customize head title
+     * @link   https://developer.wordpress.org/reference/functions/wp_title/
+     * @param  string $title initial wp_title()
+     * @return string        customized wp_title()
+     * @static
+     */
+    static function custom_head_title($title)
+    {
+        $site = [
+            'name' => get_bloginfo('name'),
+            'desc' => get_bloginfo('description'),
+            'page' => get_the_title(),
+            'separator' => ' - ',
+        ];
+
+        if (is_front_page()) {
+            $title = $site['name'] . $site['separator'] . $site['desc'];
+        } elseif (is_home()) {
+            $page = new WP_Query(['pagename' => get_query_var('pagename')]);
+            $page = $page->queried_object;
+            $blogname = $page->post_title;
+
+            $title = $blogname . $site['separator'] . $site['name'];
+        } elseif (is_category() || is_archive()) {
+            $catname = get_cat_name(get_query_var('cat'));
+            $title = $catname . $site['separator'] . $site['name'];
+        } else {
+            $title = $site['page'] . $site['separator'] . $site['name'];
+        }
+
+        return $title;
     }
 }

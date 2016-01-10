@@ -50,7 +50,7 @@ locate_template('lib/custom-post-type.php', true, true);
 //     'slug' => 'books',
 // ];
 // $book_supports = ['title', 'editor', 'thumbnail', 'comments'];
-// $books = new CustomTypes\CustomPostType($book_args, $book_supports);
+// $books = new CustomPostType($book_args, $book_supports);
 // // $books->register_taxonomy('genres');
 // $books->register_taxonomy([
 //     'taxonomy_name' => 'genre',

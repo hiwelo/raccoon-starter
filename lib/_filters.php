@@ -13,7 +13,7 @@ namespace Hwlo\Raccoon;
  * Extra filters
  * ------------- */
 
-$class = __NAMESPACE__ . '\\Extras\Extras';
+$class = __NAMESPACE__ . '\\Extras';
 
 // this function add <body> some classes
 add_filter('body_class', $class . '::body_class');
@@ -22,3 +22,13 @@ add_filter('body_class', $class . '::body_class');
 add_filter('excerpt_more', $class . '::excerpt_more');
 
 add_filter('excerpt_length', $class . '::custom_excerpt_length');
+
+
+/* --------------
+ * Titles filters
+ * -------------- */
+
+$class = __NAMESPACE__ . '\\Titles';
+
+// this function customize head title
+add_filter('wp_title', $class . '::custom_head_title');

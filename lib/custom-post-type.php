@@ -1,6 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\CustomTypes;
+namespace Hwlo\Raccoon;
 
 
 class CustomPostType

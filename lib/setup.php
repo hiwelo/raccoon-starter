@@ -1,8 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\Setup;
-
-use Hwlo\Raccoon\Assets;
+namespace Hwlo\Raccoon;
 
 
 class Setup
@@ -93,7 +91,7 @@ class Setup
          * to add custom styles, edit assets/src/css/_tinymce.less
          * @link https://codex.wordpress.org/add_editor_style
          */
-        $cssCustomPath = Assets\Assets::asset_path('dist/css/styles.css');
+        $cssCustomPath = Assets::asset_path('dist/css/styles.css');
         add_editor_style($cssCustomPath);
 
         /**

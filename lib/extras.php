@@ -1,6 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\Extras;
+namespace Hwlo\Raccoon;
 
 
 class Extras

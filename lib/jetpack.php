@@ -1,6 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\Jetpack;
+namespace Hwlo\Raccoon;
 
 
 class Jetpack

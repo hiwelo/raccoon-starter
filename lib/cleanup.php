@@ -1,6 +1,6 @@
 <?php
 
-namespace Hwlo\Raccoon\CleanUp;
+namespace Hwlo\Raccoon;
 
 
 class CleanUp
