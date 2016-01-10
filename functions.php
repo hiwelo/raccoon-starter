@@ -2,6 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
+/*
+ * Theme global var, used by this theme scripts
+ */
+$theme = [
+    'namespace' => 'raccoon', // used mainly for translation methods (_e, __, etc.)
+];
+
 /**
  * PHP librairies to include in this file
  * @var array
@@ -12,6 +19,7 @@ $libraries = [
     'lib/setup.php',
     'lib/extras.php',
     'lib/jetpack.php',
+    'lib/titles.php',
 ];
 
 /*

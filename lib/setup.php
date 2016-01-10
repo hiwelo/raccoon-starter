@@ -18,11 +18,14 @@ class Setup
 
     /**
      * Raccoon theme setup actions
+     * @global string $theme Raccoon theme vars
      * @return void
      * @static
      */
      static function init()
      {
+         global $theme;
+
          /**
           * Enable plugins to manage the document title
           * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
@@ -67,7 +70,7 @@ class Setup
           * Make this theme available for translation (in /languages dir)
           * @link https://codex.wordpress.org/load_theme_textdomain
           */
-         load_theme_textdomain('raccoon', get_template_directory() . '/languages');
+         load_theme_textdomain($theme['namespace'], get_template_directory() . '/languages');
 
          /**
           * Automatically add default posts and comments RSS feed links into wp_head()

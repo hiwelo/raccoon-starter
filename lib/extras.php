@@ -27,12 +27,14 @@ class Extras
 
     /**
      * Change the "read more" excerpt text
+     * @global string $theme Raccoon theme vars
      * @return void
      * @static
      */
     static function excerpt_more()
     {
-        $text = '&hellip; <a href="' . get_permalink() . '">' . __('En lire plus', 'raccoon') . '</a>';
+        global $theme;
+        $text = '&hellip; <a href="' . get_permalink() . '">' . __('En lire plus', $theme['namespace']) . '</a>';
         return $text;
     }
 }
