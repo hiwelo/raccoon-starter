@@ -24,4 +24,15 @@ class Extras
 
         return $classes;
     }
+
+    /**
+     * Change the "read more" excerpt text
+     * @return void
+     * @static
+     */
+    static function excerpt_more()
+    {
+        $text = '&hellip; <a href="' . get_permalink() . '">' . __('En lire plus', 'raccoon') . '</a>';
+        return $text;
+    }
 }

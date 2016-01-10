@@ -18,3 +18,6 @@ $class = new $className();
 
 // this function add <body> some classes
 add_filter('body_class', array($class, 'body_class'));
+
+// change the excerpt read more message
+add_filter('excerpt_more', array($class, 'excerpt_more'));
