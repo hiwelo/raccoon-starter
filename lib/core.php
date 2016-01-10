@@ -2,14 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Core
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -20,7 +19,7 @@ class Core
      * @return void
      * @static
      */
-    static function load_libraries($libraries)
+    public static function load_libraries($libraries)
     {
         foreach ($libraries as $library) {
             self::load_library($library);
@@ -31,8 +30,9 @@ class Core
      * Load asked library
      * @param  string $library asked library to load
      * @return void
+     * @static
      */
-    function load_library($library)
+    public static function load_library($library)
     {
         $file = get_template_directory() . '/' . $library;
         if (file_exists($file)) {
@@ -45,8 +45,9 @@ class Core
      * @param  array  $element targeted DOM element
      * @param  array  $css     CSS list
      * @return void
+     * @static
      */
-    static function injectStyle(array $element, array $css)
+    public static function injectStyle(array $element, array $css)
     {
         $element = implode('__', $element);
         $output_begin = '<style>.' . $element . ' { ';
@@ -67,8 +68,9 @@ class Core
      * @param  array  $element HTML element class (row1__row2__...)
      * @param  string $content HTML element content
      * @return void
+     * @static
      */
-    static function injectDOM($type, array $element, $content = '')
+    public static function injectDOM($type, array $element, $content = '')
     {
         if ($element[0] === true) {
             unset($element[0]);
@@ -87,8 +89,9 @@ class Core
      * JS scripts injection in HTML DOM
      * @param  string $file JS scripts list file
      * @return void
+     * @static
      */
-    static function injectScripts($file = 'scripts.json')
+    public static function injectScripts($file = 'scripts.json')
     {
         $file = file_get_contents(locate_template($file));
         $json = json_decode($file);

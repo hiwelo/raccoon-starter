@@ -2,7 +2,6 @@
 
 namespace Hwlo\Raccoon;
 
-
 /*
  * Theme global var, used by this theme scripts
  */

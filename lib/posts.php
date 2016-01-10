@@ -2,7 +2,6 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Posts
 {
     /**
@@ -12,7 +11,7 @@ class Posts
      * @return string           thumbnail URL
      * @static
      */
-    static function getThumbnail($post_id = null, $size = 'thumbnail')
+    public static function get_thumbnail($post_id = null, $size = 'thumbnail')
     {
         if (!is_numeric($post_id) && is_string($post_id)) {
             $size = $post_id;

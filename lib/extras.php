@@ -2,20 +2,20 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Extras
 {
     /**
      * Excerpt length, number of words
      * @var integer
+     * @static
      */
-    static $excerpt_length = 30;
+    public static $excerpt_length = 30;
 
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -26,7 +26,7 @@ class Extras
      * @return array
      * @static
      */
-    static function body_class($classes)
+    public static function body_class($classes)
     {
         // add page slug when it does exist
         if (is_single() || is_page() && !is_front_page()) {
@@ -46,7 +46,7 @@ class Extras
      * @return void
      * @static
      */
-    static function excerpt_more()
+    public static function excerpt_more()
     {
         global $theme;
         $text = '&hellip; <a href="' . get_permalink() . '">' . __('En lire plus', $theme['namespace']) . '</a>';
@@ -58,7 +58,7 @@ class Extras
      * @param  integer $length number of words
      * @return integer
      */
-    function custom_excerpt_length($length)
+    public function custom_excerpt_length($length)
     {
         return self::$excerpt_length;
     }

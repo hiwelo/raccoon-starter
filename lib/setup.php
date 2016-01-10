@@ -2,14 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Setup
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -20,7 +19,7 @@ class Setup
      * @return void
      * @static
      */
-    static function init()
+    public static function init()
     {
         global $theme;
 

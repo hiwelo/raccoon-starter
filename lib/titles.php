@@ -2,14 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Titles
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -20,7 +19,7 @@ class Titles
      * @return string
      * @static
      */
-    static function content()
+    public static function content()
     {
         global $theme;
 
@@ -48,7 +47,7 @@ class Titles
      * @return string        customized wp_title()
      * @static
      */
-    static function custom_head_title($title)
+    public static function custom_head_title($title)
     {
         $site = [
             'name' => get_bloginfo('name'),

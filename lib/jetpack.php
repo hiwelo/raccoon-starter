@@ -2,14 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Jetpack
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -19,17 +18,18 @@ class Jetpack
      * @return void
      * @static
      */
-    static function setup()
+    public static function setup()
     {
-        self::infinite_scroll_activation();
+        self::infiniteScrollActivation();
     }
 
     /**
      * Jetpack Infinite Scroll activation
      * @link https://jetpack.me/support/infinite-scroll/
      * @return void
+     * @static
      */
-    function infinite_scroll_activation()
+    public static function infinite_scroll_activation()
     {
         $params = [
             'container' => 'main',
@@ -42,8 +42,9 @@ class Jetpack
     /**
      * Jetpack Infinite Scroll custom render function
      * @return void
+     * @static
      */
-    function infinite_scroll_render()
+    public static function infinite_scroll_render()
     {
         while (have_posts()) {
             the_post();

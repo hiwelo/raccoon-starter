@@ -2,7 +2,6 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Users
 {
     /**
@@ -17,17 +16,17 @@ class Users
      * @return string         containing either just a URL or a complete image tag
      * @static
      */
-    static function get_Gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = [])
+    public static function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = [])
     {
         $url = 'https://gravatar.com/avatar/';
-        $url.= md5(strtolower(trim($email)));
-        $url.= '?s=' . $s . '&d=' . $d . '&r=' . $r;
+        $url .= md5(strtolower(trim($email)));
+        $url .= '?s=' . $s . '&d=' . $d . '&r=' . $r;
         if ($img) {
             $url = '<img src="' . $url . '" alt=""';
             foreach ($atts as $key => $val) {
-                $url.= ' ' . $key . '="' . $val . '"';
+                $url .= ' ' . $key . '="' . $val . '"';
             }
-            $url.= ' />';
+            $url .= ' />';
         }
 
         return $url;

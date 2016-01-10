@@ -19,14 +19,12 @@ cache:
 install:
   - npm install -g npm@latest
   - npm install -g babel-cli gulp jshint jscs
-  - npm install
-  - npm install --prefix assets/
   - babel gulpfile.babel.js --out-file gulpfile.js
-  - gulp
   - composer self-update && composer --version
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require squizlabs/php_codesniffer
 
 script:
-  - npm run jshint
+  - jshint assets/src/js/*.js
+  - jscs assets/src/js/
   - phpcs --standard=ruleset.xml --extensions=php -n -s .

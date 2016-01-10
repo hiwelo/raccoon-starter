@@ -2,7 +2,6 @@
 
 namespace Hwlo\Raccoon;
 
-
 class CustomPostType
 {
     /**
@@ -105,7 +104,7 @@ class CustomPostType
             );
             $this->post_type_name = $post_type_names['post_type_name'];
 
-            foreach($names as $name) {
+            foreach ($names as $name) {
                 if (isset($post_type_names[$name])) {
                     $this->$name = $post_type_names[$name];
                 } else {
@@ -286,19 +285,19 @@ class CustomPostType
         $slug = $this->slug;
 
         $labels = [
-            'name' => sprintf( __('%s', $this->theme_namespace), $plural),
-            'singular_name' => sprintf( __('%s', $this->theme_namespace), $singular),
-            'menu_name' => sprintf( __('%s', $this->theme_namespace), $plural),
-            'all_items' => sprintf( __('%s', $this->theme_namespace), $plural),
+            'name' => sprintf(__('%s', $this->theme_namespace), $plural),
+            'singular_name' => sprintf(__('%s', $this->theme_namespace), $singular),
+            'menu_name' => sprintf(__('%s', $this->theme_namespace), $plural),
+            'all_items' => sprintf(__('%s', $this->theme_namespace), $plural),
             'add_new' => __('Add New', $this->theme_namespace),
-            'add_new_item' => sprintf( __('Add New %s', $this->theme_namespace), $singular),
-            'edit_item' => sprintf( __('Edit %s', $this->theme_namespace), $singular),
-            'new_item' => sprintf( __('New %s', $this->theme_namespace), $singular),
-            'view_item' => sprintf( __('View %s', $this->theme_namespace), $singular),
-            'search_items' => sprintf( __('Search %s', $this->theme_namespace), $plural),
-            'not_found' => sprintf( __('No %s found', $this->theme_namespace), $plural),
-            'not_found_in_trash' => sprintf( __('No %s found in Trash', $this->theme_namespace), $plural),
-            'parent_item_colon' => sprintf( __('Parent %s:', $this->theme_namespace), $singular),
+            'add_new_item' => sprintf(__('Add New %s', $this->theme_namespace), $singular),
+            'edit_item' => sprintf(__('Edit %s', $this->theme_namespace), $singular),
+            'new_item' => sprintf(__('New %s', $this->theme_namespace), $singular),
+            'view_item' => sprintf(__('View %s', $this->theme_namespace), $singular),
+            'search_items' => sprintf(__('Search %s', $this->theme_namespace), $plural),
+            'not_found' => sprintf(__('No %s found', $this->theme_namespace), $plural),
+            'not_found_in_trash' => sprintf(__('No %s found in Trash', $this->theme_namespace), $plural),
+            'parent_item_colon' => sprintf(__('Parent %s:', $this->theme_namespace), $singular),
         ];
 
         $defaults = [
@@ -353,23 +352,23 @@ class CustomPostType
         }
 
         $labels = [
-            'name' => sprintf( __('%s', $this->theme_namespace), $plural),
-            'singular_name' => sprintf( __('%s', $this->theme_namespace), $singular),
-            'menu_name' => sprintf( __('%s', $this->theme_namespace), $plural),
-            'all_items' => sprintf( __('%s', $this->theme_namespace), $plural),
-            'edit_item' => sprintf( __('Edit %s', $this->theme_namespace), $singular),
-            'view_item' => sprintf( __('View %s', $this->theme_namespace), $singular),
-            'update_item' => sprintf( __('Update %s', $this->theme_namespace), $singular),
-            'add_new_item' => sprintf( __('Add New %s', $this->theme_namespace), $singular),
-            'new_item_name' => sprintf( __('New %s Name', $this->theme_namespace), $plural),
-            'parent_item' => sprintf( __('Parent %s', $this->theme_namespace), $plural),
-            'parent_item_colon' => sprintf( __('Parent %s:', $this->theme_namespace), $plural),
-            'search_items' => sprintf( __('Search %s', $this->theme_namespace), $plural),
-            'popular_items' => sprintf( __('Popular %s', $this->theme_namespace), $plural),
-            'separate_items_with_commas' => sprintf( __('Separate %s with commas', $this->theme_namespace), $plural),
-            'add_or_remove_items' => sprintf( __('Add or remove $s', $this->theme_namespace), $plural),
-            'choose_from_most_used' => sprintf( __('Choose from most used %s', $this->theme_namespace), $plural),
-            'not_found' => sprintf( __('No %s found', $this->theme_namespace), $plural),
+            'name' => sprintf(__('%s', $this->theme_namespace), $plural),
+            'singular_name' => sprintf(__('%s', $this->theme_namespace), $singular),
+            'menu_name' => sprintf(__('%s', $this->theme_namespace), $plural),
+            'all_items' => sprintf(__('%s', $this->theme_namespace), $plural),
+            'edit_item' => sprintf(__('Edit %s', $this->theme_namespace), $singular),
+            'view_item' => sprintf(__('View %s', $this->theme_namespace), $singular),
+            'update_item' => sprintf(__('Update %s', $this->theme_namespace), $singular),
+            'add_new_item' => sprintf(__('Add New %s', $this->theme_namespace), $singular),
+            'new_item_name' => sprintf(__('New %s Name', $this->theme_namespace), $plural),
+            'parent_item' => sprintf(__('Parent %s', $this->theme_namespace), $plural),
+            'parent_item_colon' => sprintf(__('Parent %s:', $this->theme_namespace), $plural),
+            'search_items' => sprintf(__('Search %s', $this->theme_namespace), $plural),
+            'popular_items' => sprintf(__('Popular %s', $this->theme_namespace), $plural),
+            'separate_items_with_commas' => sprintf(__('Separate %s with commas', $this->theme_namespace), $plural),
+            'add_or_remove_items' => sprintf(__('Add or remove $s', $this->theme_namespace), $plural),
+            'choose_from_most_used' => sprintf(__('Choose from most used %s', $this->theme_namespace), $plural),
+            'not_found' => sprintf(__('No %s found', $this->theme_namespace), $plural),
         ];
 
         // we set taxonomy's options
@@ -391,7 +390,7 @@ class CustomPostType
      * Register all custom taxonomies
      * @return void
      */
-    function register_taxonomies()
+    public function register_taxonomies()
     {
         if (is_array($this->taxonomy_settings)) {
             foreach ($this->taxonomy_settings as $taxonomy_name => $options) {
@@ -471,7 +470,7 @@ class CustomPostType
         global $post;
 
         switch ($column) {
-            case (taxonomy_exists($column)) :
+            case (taxonomy_exists($column)):
                 $terms = get_the_terms($post_id, $column);
 
                 if (!empty($terms)) {
@@ -492,7 +491,7 @@ class CustomPostType
                 }
                 break;
 
-            case (preg_match('/^meta_/', $column) ? true : false) :
+            case (preg_match('/^meta_/', $column) ? true : false):
                 // meta_book_author (meta key = book_author)
                 $x = substr($column, 5);
                 $meta = get_post_meta($post->ID, $x);
@@ -504,7 +503,7 @@ class CustomPostType
                 if (has_post_thumbnail()) {
                     echo '<a href="' . $link . '">';
                         the_post_thumbnail([60, 60]);
-                    echo '</a>';
+                        echo '</a>';
                 } else {
                     echo '<a href="' . $link . '"><img src="' . site_url('/wp-includes/images/crystal/default.png') . '" alt="' . $post->post_title . '" /></a>';
                 }

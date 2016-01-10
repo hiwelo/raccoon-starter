@@ -2,14 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
-
 class CleanUp
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -19,7 +18,7 @@ class CleanUp
      * @return void
      * @static
      */
-    static function init()
+    public static function init()
     {
         /*
          * WP_Admin elements cleanups
@@ -61,25 +60,27 @@ class CleanUp
     /**
      * WP Admin dashboard homepage asked widget removal
      * @return void
+     * @static
      */
-    function dashboard_widget_removal()
+    public static function dashboard_widget_removal()
     {
-        remove_meta_box('dashboard_right_now','dashboard','core');// right now overview box
-        remove_meta_box('dashboard_incoming_links','dashboard','core');// incoming links box
-        remove_meta_box('dashboard_quick_press','dashboard','core');// quick press box
-        remove_meta_box('dashboard_plugins','dashboard','core');// new plugins box
-        remove_meta_box('dashboard_recent_drafts','dashboard','core');// recent drafts box
-        remove_meta_box('dashboard_recent_comments','dashboard','core');// recent comments box
-        remove_meta_box('dashboard_primary','dashboard','core');// wordpress development blog box
-        remove_meta_box('dashboard_secondary','dashboard','core');// other wordpress news box
+        remove_meta_box('dashboard_right_now', 'dashboard', 'core');// right now overview box
+        remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');// incoming links box
+        remove_meta_box('dashboard_quick_press', 'dashboard', 'core');// quick press box
+        remove_meta_box('dashboard_plugins', 'dashboard', 'core');// new plugins box
+        remove_meta_box('dashboard_recent_drafts', 'dashboard', 'core');// recent drafts box
+        remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');// recent comments box
+        remove_meta_box('dashboard_primary', 'dashboard', 'core');// wordpress development blog box
+        remove_meta_box('dashboard_secondary', 'dashboard', 'core');// other wordpress news box
     }
 
     /**
      * Remove some items in the admin navigation
      * @link http://codex.wordpress.org/Function_Reference/remove_menu_page
      * @return void
+     * @static
      */
-    function menu_items_deletion()
+    public static function menu_items_deletion()
     {
         //remove_menu_page('index.php'); // Dashboard
         //remove_menu_page('edit.php'); // Posts
@@ -98,8 +99,9 @@ class CleanUp
      * Remove some items in the admin subnavigation
      * @link http://codex.wordpress.org/Function_Reference/remove_submenu_page
      * @return void
+     * @static
      */
-    function menu_subitems_deletion()
+    public static function menu_subitems_deletion()
     {
         //remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=post_tag' ); // remove tags from edit
     }
@@ -108,8 +110,9 @@ class CleanUp
      * Remove some meta boxes from posts, pages or links
      * @link http://codex.wordpress.org/Function_Reference/remove_meta_box
      * @return void
+     * @static
      */
-    function meta_boxes_customization()
+    public static function meta_boxes_customization()
     {
         /* Remove meta boxes in posts page */
         //remove_meta_box('postcustom','post','normal'); // custom fields metabox
@@ -145,8 +148,9 @@ class CleanUp
      * Choose informations to remove from posts list
      * @param  array $defaults columns list
      * @return array
+     * @static
      */
-    function custom_posts_columns($defaults)
+    public static function custom_posts_columns($defaults)
     {
         unset($defaults['comments']);
         // unset($defaults['author']);
@@ -161,8 +165,9 @@ class CleanUp
      * Choose informations to remove from pages list
      * @param  array $defaults columns list
      * @return array
+     * @static
      */
-    function custom_pages_columns($defaults)
+    public static function custom_pages_columns($defaults)
     {
         unset($defaults['comments']);
         // unset($defaults['author']);
@@ -175,8 +180,9 @@ class CleanUp
      * Remove item into the admin bar
      * @global object $wp_admin_bar Admin bar object
      * @return void
+     * @static
      */
-    function admin_bar_customization()
+    public static function admin_bar_customization()
     {
         global $wp_admin_bar;
         // $wp_admin_bar->remove_menu('wp-logo'); // remove the whole wordpress logo, help, etc. menu
@@ -187,8 +193,9 @@ class CleanUp
      * Choose widget to unregister in the WordPress Admin dashboard
      * @link http://wpmu.org/how-to-remove-default-wordpress-widgets-and-clean-up-your-widgets-page/
      * @return void
+     * @static
      */
-    function unregister_widgets()
+    public static function unregister_widgets()
     {
         // unregister_widget('WP_Widget_Pages');
         // unregister_widget('WP_Widget_Calendar');
@@ -209,8 +216,9 @@ class CleanUp
     /**
      * Remove update notifications for everyone except admin users
      * @return void
+     * @static
      */
-    function update_notifications_removal()
+    public static function update_notifications_removal()
     {
         remove_action('admin_notices', 'update_nag', 3);
     }
@@ -219,8 +227,9 @@ class CleanUp
      * Disable self trackbacking links
      * @param  array $links trackback links
      * @return void
+     * @static
      */
-    function self_pings_removal(&$links)
+    public static function self_pings_removal(&$links)
     {
         foreach ($links as $l => $link) {
             if (0 === strpos($link, home_url())) {
@@ -232,8 +241,9 @@ class CleanUp
     /**
      * Hello Dolly plugin removal
      * @return void
+     * @static
      */
-    function remove_hello_dolly()
+    public static function remove_hello_dolly()
     {
         if (is_admin() && file_exists(WP_PLUGIN_DIR . '/hello.php')) {
             @unlink(WP_PLUGIN_DIR . '/hello.php');
@@ -244,8 +254,9 @@ class CleanUp
      * Remove old IRC-like contact methods and add social media fields
      * @param  array $contactmethods contact method fields
      * @return array
+     * @static
      */
-    function user_socialmedias($contactmethods)
+    public static function user_socialmedias($contactmethods)
     {
         // we unset yim, aim and jabber fields
         unset($contactmethods['yim']);
@@ -262,8 +273,9 @@ class CleanUp
     /**
      * Set WP Login header url to the home url
      * @return string
+     * @static
      */
-    function raccoon_login_url()
+    public static function raccoon_login_url()
     {
         return home_url('/');
     }
@@ -271,8 +283,9 @@ class CleanUp
     /**
      * Set WP Login header title to the website title
      * @return string
+     * @static
      */
-    function raccoon_login_title()
+    public static function raccoon_login_title()
     {
         return get_option('blogname');
     }
@@ -280,8 +293,9 @@ class CleanUp
     /**
      * Remove l10n script used for javascript translation
      * @return void
+     * @static
      */
-    function remove_l10n()
+    public static function remove_l10n()
     {
         if (!is_admin()) {
             wp_deregister_script('l10n');
@@ -291,8 +305,9 @@ class CleanUp
     /**
      * WordPress head meta cleanup
      * @return void
+     * @static
      */
-    private function head_cleanup()
+    public static function head_cleanup()
     {
         // remove cat feeds
         remove_action('wp_head', 'feed_links_extra', 3);
@@ -327,8 +342,9 @@ class CleanUp
      * Remove WordPress version from CSS & Scripts
      * @param  string $src css & script url
      * @return string
+     * @static
      */
-    function remove_wordpress_version_css_js($src)
+    public function remove_wordpress_version_css_js($src)
     {
         if (strpos($src, 'ver=')) {
             $src = remove_query_arg('ver', $src);

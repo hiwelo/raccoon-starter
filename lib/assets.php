@@ -2,14 +2,13 @@
 
 namespace Hwlo\Raccoon;
 
-
 class Assets
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
      * @return object
      */
-    function __construct()
+    public function __construct()
     {
         return $this;
     }
@@ -20,7 +19,7 @@ class Assets
      * @return string
      * @static
      */
-    static function asset_path($filename)
+    public static function asset_path($filename)
     {
         $assets_path = '/assets/dist/';
         $dist_path = get_template_directory_uri() . $assets_path;

@@ -6,6 +6,8 @@
   <rule ref="PSR2">
     <!-- Allow multiple PHP statements in the same line (usually in template files) -->
     <exclude name="Generic.Formatting.DisallowMultipleStatements.SameLine"/>
+    <exclude name="Generic.NamingConventions.CamelCapsFunctionName" />
+    <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps" />
   </rule>
 
   <!-- Verify that operators have valid spacing surrounding them -->
