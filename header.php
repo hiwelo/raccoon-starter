@@ -4,8 +4,6 @@
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  * @package raccoon
  */
-
-var_dump($navigations);
 ?>
 <!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
