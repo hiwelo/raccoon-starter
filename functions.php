@@ -22,6 +22,9 @@ $libraries = [
     'lib/titles.php',
     'lib/posts.php',
     'lib/users.php',
+    'lib/custom-post-type.php',
+    'lib/navigations.php',
+    'lib/template.php',
 ];
 
 /*
@@ -37,9 +40,11 @@ locate_template('lib/_actions.php', true, true);
 locate_template('lib/_filters.php', true, true);
 
 /*
- * We load custom post types and custom taxonomies facilities
+ * We declare navigation menus for this theme
  */
-locate_template('lib/custom-post-type.php', true, true);
+$navigations = new Navigations([
+    'primary' => 'Primary navigation',
+]);
 
 /*
  * We declare new custom post types or custom taxonomies

@@ -5,6 +5,8 @@
  * @package raccoon
  */
 
-get_header();
+namespace Hwlo\Raccoon;
 
-get_footer();
+Template::header();
+
+Template::footer();
