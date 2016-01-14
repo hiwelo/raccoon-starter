@@ -205,17 +205,6 @@ gulp.task('fonts', () => {
     .pipe($.filesize());
 });
 
-// Icons task: iconfont (svg to woff) + (src -> dist)
-gulp.task('icons', () => {
-  return gulp.src(paths.src.icons)
-    .pipe($.plumber(onError))
-    .pipe($.iconfont(project.conf.iconfont))
-    .on('glyphs', (glyphs, options) => {
-      console.log(glyphs, options);
-    })
-    .pipe(gulp.dest(paths.dist.fonts));
-});
-
 // JS vendor task: concat + uglify + (src -> dist)
 gulp.task('vendor', () => {
   return gulp.src(vendors.list)
