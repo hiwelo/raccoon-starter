@@ -12,14 +12,16 @@ cache:
     - node_modules
 
 install:
-  - npm install jshint jscs gulp babel-cli babel-core babel-preset-es2015
+  - npm install jshint jshint-stylish
+  - npm install jscs
+  - npm install babel-cli babel-core babel-preset-es2015
   - composer self-update && composer --version
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require squizlabs/php_codesniffer
 
 before_script:
   - babel gulpfile.babel.js --out-file gulpfile.js
-  - npm install gulp-load-plugins del gulp-sync browser-sync yargs
+  - npm install gulp gulp-load-plugins del gulp-sync browser-sync yargs
 
 script:
   - gulp test

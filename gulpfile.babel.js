@@ -215,11 +215,6 @@ gulp.task('vendor', () => {
     .pipe(browserSync.stream());
 });
 
-// Test task
-gulp.task('test', () => {
-  console.log('Hello World!');
-});
-
 
 /*
  * Test tasks
@@ -231,7 +226,7 @@ gulp.task('jshint', () => {
     paths.src.scripts,
     paths.root + 'gulpfile.babel.js',
   ])
-    .pipe($.jshint())
+    .pipe($.jshint('.jshintrc'))
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
