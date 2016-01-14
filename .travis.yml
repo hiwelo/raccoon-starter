@@ -18,11 +18,11 @@ install:
   - composer global require squizlabs/php_codesniffer
 
 before_script:
-  - npm install -g gulp babel-cli babel-core babel-preset-es2015
+  - npm run setup
   - babel gulpfile.babel.js --out-file gulpfile.js
-  - gulp
 
 script:
+  - gulp
   - jshint assets/src/js/*.js
   - jscs assets/src/js/
   - phpcs --standard=ruleset.xml --extensions=php -n -s .
