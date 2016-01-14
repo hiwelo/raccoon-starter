@@ -215,6 +215,11 @@ gulp.task('vendor', () => {
     .pipe(browserSync.stream());
 });
 
+// Test task
+gulp.task('test', () => {
+  console.log('Hello World!');
+});
+
 
 /*
  * Test tasks
