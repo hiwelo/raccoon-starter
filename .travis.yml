@@ -12,8 +12,7 @@ cache:
     - node_modules
 
 install:
-  - npm install -g jshint jscs gulp
-  - npm install babel-cli babel-core babel-preset-es2015
+  - npm install jshint jscs gulp babel-cli babel-core babel-preset-es2015
   - composer self-update && composer --version
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require squizlabs/php_codesniffer
