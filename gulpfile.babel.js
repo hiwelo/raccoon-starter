@@ -9,6 +9,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import gSync from 'gulp-sync';
 import browserSync from 'browser-sync';
+import argv from 'yargs';
 
 
 /*
@@ -22,6 +23,7 @@ const project = {
     js: 'es2015', // choose 'es2015' or another installed babel preset
   },
   sync: {
+    flags: true, // use flags in command line to activate browserSync ? (--browsersync)
     watch: false, // browserSync activation
     proxyMode: true, // browserSync proxy mode (see project.url for the url)
   },
@@ -103,6 +105,14 @@ const vendors = {
 const $ = gulpLoadPlugins();
 const gulpSync = gSync(gulp);
 browserSync.create();
+
+
+/*
+ * Command flags
+ */
+
+const args = argv.argv;
+const isBrowserSync = args.browsersync;
 
 
 /*
@@ -262,7 +272,7 @@ gulp.task('del-build', () => {
 
 gulp.task('watch', () => {
   // browserSync watch task
-  if (project.sync.watch) {
+  if ((project.sync.watch === true && project.sync.flags === false) || isBrowserSync === true) {
     if (project.sync.proxyMode === true) {
       browserSync.init({
         proxy: project.url,
