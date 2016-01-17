@@ -297,6 +297,7 @@ gulp.task('watch', () => {
 gulp.task('build', gulpSync.sync([project.preprocessor.css, ['css', 'js', 'vendor', 'img', 'fonts']]));
 gulp.task('work', gulpSync.sync(['build', 'watch']));
 gulp.task('prod', gulpSync.sync(['build', 'del-build']));
+gulp.task('test', ['jshint']);
 gulp.task('clean', ['del-prod']);
 gulp.task('start', ['work']);
 gulp.task('default', ['build']);
