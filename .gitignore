@@ -32,4 +32,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-/vendor/
+# Composer
+vendor/
+
+# PHP Doc
+doc/api/

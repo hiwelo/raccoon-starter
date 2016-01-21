@@ -8,18 +8,32 @@
         {
             "name": "Damien Senger",
             "email": "hi@hiwelo.co",
-            "homepage": "https://hiwelo.co/"
+            "homepage": "https://hiwelo.co/",
+            "role": "Developer"
         }
     ],
-    "keywords": [
+    "keywords" : [
       "wordpress",
       "starter theme"
     ],
     "support": {
-      "issues": "https://github.com/hiwelo/raccoon/issues"
+      "issues": "https://github.com/hiwelo/raccoon/issues",
+      "source": "https://github.com/hiwelo/raccoon/"
     },
     "require": {
       "php": ">=5.6.0",
-      "composer/installers": "~1.0"
+      "composer/installers": "~1.0",
+        "phpdocumentor/phpdocumentor": "^2.8"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.5"
+    },
+    "scripts": {
+      "post-install-cmd": [
+        "bash contrib/setup.sh"
+      ],
+      "phpcs": "phpcs --extensions=php --standard=PEAR --ignore=vendor/,node_modules/ .",
+      "phpcbf": "phpcbf --extensions=php --standard=PEAR --ignore=vendor/,node_modules/ .",
+      "phpdoc": "phpdoc -d . -t ./doc/api/ --ignore=vendor/,node_modules/"
     }
 }
