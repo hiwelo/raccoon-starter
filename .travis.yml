@@ -21,7 +21,7 @@ install:
 
 before_script:
   - babel gulpfile.babel.js --out-file gulpfile.js
-  - npm install gulp gulp-load-plugins del gulp-sync browser-sync yargs
+  - npm install del gulp gulp-load-plugins gulp-jshint gulp-sync browser-sync yargs
 
 script:
   - gulp test
