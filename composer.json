@@ -42,6 +42,7 @@
         "git pull"
       ],
       "post-update-cmd": [
+        "bash contrib/setup.sh",
         "npm update"
       ],
       "test": [
@@ -53,8 +54,7 @@
         "./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d . -t ./docs/api/ --ignore=vendor/,docs/,node_modules/"
       ],
       "work": [
-        "gulp",
-        "gulp watch"
+        "npm start"
       ]
     }
 }

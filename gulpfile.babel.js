@@ -79,7 +79,7 @@ const paths = {
     fonts: './assets/src/fonts/*.{woff,woff2}',
     icons: './assets/src/icons/*.svg',
   },
-  vendors: './assets/node_modules',
+  vendors: './node_modules',
   dist: {
     root: './assets/dist',
     styles: './assets/dist/css',
@@ -213,21 +213,6 @@ gulp.task('vendor', () => {
     .pipe($.uglify(project.conf.uglify))
     .pipe(gulp.dest(paths.dist.scripts))
     .pipe(browserSync.stream());
-});
-
-
-/*
- * Test tasks
- */
-
-// JSHint task for scripts
-gulp.task('jshint', () => {
-  return gulp.src([
-    paths.src.scripts,
-    paths.root + 'gulpfile.babel.js',
-  ])
-    .pipe($.jshint('.jshintrc'))
-    .pipe($.jshint.reporter('jshint-stylish'));
 });
 
 
