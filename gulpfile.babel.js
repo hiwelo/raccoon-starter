@@ -205,17 +205,6 @@ gulp.task('fonts', () => {
     .pipe($.filesize());
 });
 
-// Icons task: iconfont (svg to woff) + (src -> dist)
-gulp.task('icons', () => {
-  return gulp.src(paths.src.icons)
-    .pipe($.plumber(onError))
-    .pipe($.iconfont(project.conf.iconfont))
-    .on('glyphs', (glyphs, options) => {
-      console.log(glyphs, options);
-    })
-    .pipe(gulp.dest(paths.dist.fonts));
-});
-
 // JS vendor task: concat + uglify + (src -> dist)
 gulp.task('vendor', () => {
   return gulp.src(vendors.list)
@@ -237,7 +226,7 @@ gulp.task('jshint', () => {
     paths.src.scripts,
     paths.root + 'gulpfile.babel.js',
   ])
-    .pipe($.jshint())
+    .pipe($.jshint('.jshintrc'))
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
@@ -308,6 +297,7 @@ gulp.task('watch', () => {
 gulp.task('build', gulpSync.sync([project.preprocessor.css, ['css', 'js', 'vendor', 'img', 'fonts']]));
 gulp.task('work', gulpSync.sync(['build', 'watch']));
 gulp.task('prod', gulpSync.sync(['build', 'del-build']));
+gulp.task('test', ['jshint']);
 gulp.task('clean', ['del-prod']);
 gulp.task('start', ['work']);
 gulp.task('default', ['build']);
