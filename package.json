@@ -4,12 +4,12 @@
   "description": "Raccoon is a personal wordpress starter theme based on NPM, Babel ES-2015, Gulp and Knacss",
   "main": "index.php",
   "scripts": {
-    "setup": "npm install && npm install --prefix assets/ && npm run gulpfile-update && gulp",
-    "build": "npm install --prefix assets/ && npm run gulpfile-update && gulp",
-    "jshint": "gulp jshint",
-    "vendor-update": "npm update --prefix assets/",
+    "postinstall": "npm run setup",
+    "setup": "npm install --prefix assets/ && npm run gulpfile-update && gulp",
+    "test": "npm run jshint",
+    "jshint": "jshint --reporter=node_modules/jshint-stylish --exclude-path=.gitignore . || true",
     "gulpfile-update": "babel gulpfile.babel.js --out-file gulpfile.js",
-    "phpcs": "phpcs --standard=ruleset.xml --extensions=php -n -s ."
+    "vendor-update": "npm update --prefix assets/"
   },
   "repository": {
     "type": "git",
