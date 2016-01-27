@@ -8,7 +8,7 @@
 
 PHPCS_BIN=vendor/squizlabs/php_codesniffer/scripts/phpcs
 PHPCS_CODING_STANDARD=PEAR
-PHPCS_IGNORE=vendor/,node_modules/
+PHPCS_IGNORE=vendor/,node_modules/,docs/
 TMP_STAGING=".tmp_staging"
 
 # parse config
