@@ -1,31 +1,57 @@
 <?php
-
+/**
+ * Navigation helper class
+ *
+ * PHP version 5
+ *
+ * @category Navigations
+ * @package  Raccoon
+ * @author   Damien Senger <hi@hiwelo.co>
+ * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
+ * @link     http://leqg.info
+ */
 namespace Hwlo\Raccoon;
 
+/**
+ * Navigation helper class
+ *
+ * PHP version 5
+ *
+ * @category Navigations
+ * @package  Raccoon
+ * @author   Damien Senger <hi@hiwelo.co>
+ * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
+ * @link     http://leqg.info
+ */
 class Navigations
 {
     /**
      * Registered custom navigations
+     *
      * @var array
      */
-    private $navigations = [];
+    private $_navigations = [];
 
     /**
      * Theme namespace, used for l10n
+     *
      * @var string
      */
-    private $namespace = '';
+    private $_namespace = '';
 
     /**
      * Constructor, registers a new list of navigation menus
-     * @param array $list menu list (menu location identifier as key => menu description as value)
+     *
+     * @param array $list menu list (menu location identifier as
+     *                    key => menu description as value)
+     *
      * @return void
      */
     public function __construct(array $list)
     {
         // search the theme namespace
         global $theme;
-        $this->namespace = $theme['namespace'];
+        $this->_namespace = $theme['namespace'];
 
         // saves navigation menus declared here
         if (is_array($list)) {
@@ -33,13 +59,15 @@ class Navigations
         }
 
         // Navigation menus Wordpress registration
-        $this->register_nav_menus();
+        $this->registerMenus();
     }
 
     /**
-     * get an object's variable
-     * @param  string $var var name
-     * @return mixed       var value
+     * Get an object's variable
+     *
+     * @param string $var var name
+     *
+     * @return mixed var value
      */
     public function get($var)
     {
@@ -51,9 +79,11 @@ class Navigations
     }
 
     /**
-     * set an object's variable
-     * @param  string $var   var name
-     * @param  mixed  $value var value
+     * Set an object's variable
+     *
+     * @param string $var   var name
+     * @param mixed  $value var value
+     *
      * @return boolean
      */
     public function set($var, $value)
@@ -77,44 +107,52 @@ class Navigations
 
     /**
      * WordPress wp_get_nav_menu_items() method helper
-     * @param  string $location menu id, name or slug
-     * @param  array  $args     optional arguments
+     *
+     * @param string $location menu id, name or slug
+     * @param array  $args     optional arguments
+     *
      * @return array
      */
-    public function get_menu($location, $args = [])
+    public function getMenu($location, $args = [])
     {
         return wp_get_nav_menu_items($location, $args);
     }
 
     /**
      * WordPress has_nav_menu() method helper
-     * @link   https://codex.wordpress.org/Function_Reference/has_nav_menu
-     * @param  string  $location menu location identifier slug
+     *
+     * @param string $location menu location identifier slug
+     *
      * @return boolean
+     * @link   https://codex.wordpress.org/Function_Reference/has_nav_menu
      */
-    public function has_nav_menu($location)
+    public function hasNavMenu($location)
     {
-        if ($this->is_registered($location)) {
+        if ($this->isRegistered($location)) {
             return has_nav_menu($location);
         }
     }
 
     /**
      * Is this navigation menu already registered ?
-     * @param  string  $location menu location identifier slug
+     *
+     * @param string $location menu location identifier slug
+     *
      * @return boolean
      */
-    public function is_registered($location)
+    public function isRegistered($location)
     {
-        return array_key_exists($location, $this->navigations);
+        return array_key_exists($location, $this->_navigations);
     }
 
     /**
      * Returns a navigation menu, WordPress wp_nav_menu() method helper
-     * @link   https://codex.wordpress.org/Function_Reference/wp_nav_menu
-     * @param  string $location theme location to be used
-     * @param  array  $args     array of nav menu arguments
+     *
+     * @param string $location theme location to be used
+     * @param array  $args     array of nav menu arguments
+     *
      * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/wp_nav_menu
      */
     public function menu($location, $args = [])
     {
@@ -126,7 +164,7 @@ class Navigations
         ];
         $args = array_replace_recursive($defaults, $args);
 
-        if ($this->is_registered($location)) {
+        if ($this->isRegistered($location)) {
             $args['theme_location'] = $location;
             wp_nav_menu($args);
         }
@@ -134,7 +172,9 @@ class Navigations
 
     /**
      * Registers a list of navigation menus
-     * @param  array  $list navigation menus list
+     *
+     * @param array $list navigation menus list
+     *
      * @return void
      */
     public function register(array $list)
@@ -146,24 +186,26 @@ class Navigations
 
     /**
      * Registers a new navigation menu
+     *
+     * @param string $location    menu location identifier, like a slug
+     * @param string $description menu location descriptive text
+     *
+     * @return boolean
      * @link   https://codex.wordpress.org/Function_Reference/register_nav_menu/
-     * @param  string $location    menu location identifier, like a slug
-     * @param  string $description menu location descriptive text
-     * @return bool
      */
-    public function register_nav_menu($location, $description = '')
+    public function registerMenu($location, $description = '')
     {
         // controls vars
         if (!is_string($location)) {
             return false;
         }
         if (empty($description)) {
-            $description = $this->get_description($location);
+            $description = $this->_getDesc($location);
         }
 
         // register this navigation menu
-        if (!array_key_exists($location, $this->navigations)) {
-            $this->navigations[$location] = __($description, $this->namespace);
+        if (!array_key_exists($location, $this->_navigations)) {
+            $this->_navigations[$location] = __($description, $this->_namespace);
             return true;
         } else {
             return false;
@@ -173,13 +215,14 @@ class Navigations
     /**
      * Registers the navigation menus declared for this theme
      * this function is an helper for WordPress register_nav_menus()
-     * @link   https://codex.wordpress.org/Function_Reference/register_nav_menus/
+     *
      * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/register_nav_menus/
      */
-    public function register_nav_menus()
+    public function registerMenus()
     {
         // get registered navigations
-        $navigations = $this->navigations;
+        $navigations = $this->_navigations;
 
         // navigations registration
         register_nav_menus($navigations);
@@ -187,35 +230,40 @@ class Navigations
 
     /**
      * Unregisters a specified navigation menu
-     * @link   https://codex.wordpress.org/Function_Reference/unregister_nav_menu
-     * @param  string $location menu location identifier slug
+     *
+     * @param string $location menu location identifier slug
+     *
      * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/unregister_nav_menu
      */
     public function unregister($location)
     {
-        if (array_key_exists($location, $this->navigations)) {
-            unset($this->navigations[$location]);
+        if (array_key_exists($location, $this->_navigations)) {
+            unset($this->_navigations[$location]);
             unregister_nav_menu($location);
         }
     }
 
     /**
      * Unregisters all declared navigation menus
+     *
      * @return void
      */
-    public function unregister_all()
+    public function unregisterAll()
     {
-        foreach ($this->navigations as $location => $description) {
+        foreach ($this->_navigations as $location => $description) {
             $this->unregister($location);
         }
     }
 
     /**
      * Returns a human-friendly text from the location data
-     * @param  string $location menu location identifier, like a slug
-     * @return string           menu location identifier more "human-friendly"
+     *
+     * @param string $location menu location identifier, like a slug
+     *
+     * @return string menu location identifier more "human-friendly"
      */
-    private function get_description($location)
+    private function _getDesc($location)
     {
         // transforms location to a more human-friendly text
         $description = str_replace('_', ' ', $location);
@@ -225,11 +273,16 @@ class Navigations
         return $description;
     }
 
+    /**
+     * Return some default debug informations
+     *
+     * @return void
+     */
     public function __debugInfo()
     {
         return [
-            'namespace' => $this->namespace,
-            'navigations' => $this->navigations,
+            'namespace' => $this->_namespace,
+            'navigations' => $this->_navigations,
         ];
     }
 }

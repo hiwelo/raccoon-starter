@@ -1,11 +1,33 @@
 <?php
-
+/**
+ * Content titles related methods
+ *
+ * PHP version 5
+ *
+ * @category Titles
+ * @package  Raccoon
+ * @author   Damien Senger <hi@hiwelo.co>
+ * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
+ * @link     http://leqg.info
+ */
 namespace Hwlo\Raccoon;
 
+/**
+ * User related methods
+ *
+ * PHP version 5
+ *
+ * @category TItles
+ * @package  Raccoon
+ * @author   Damien Senger <hi@hiwelo.co>
+ * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
+ * @link     http://leqg.info
+ */
 class Titles
 {
     /**
      * Empty constructor for WordPress add_action or add_filter
+     *
      * @return object
      */
     public function __construct()
@@ -15,6 +37,7 @@ class Titles
 
     /**
      * Generate an appropriate page title, by page type
+     *
      * @global string $theme Raccoon theme vars
      * @return string
      * @static
@@ -32,7 +55,10 @@ class Titles
         } elseif (is_archive()) {
             return get_the_archive_title();
         } elseif (is_search()) {
-            return sprintf(__('Search Results for %s', $theme['namespace']), get_search_query());
+            return sprintf(
+                __('Search Results for %s', $theme['namespace']),
+                get_search_query()
+            );
         } elseif (is_404()) {
             return __('Not Found', $theme['namespace']);
         } else {
@@ -42,12 +68,14 @@ class Titles
 
     /**
      * Customize head title
-     * @link   https://developer.wordpress.org/reference/functions/wp_title/
-     * @param  string $title initial wp_title()
+     *
+     * @param string $title initial wp_title()
+     *
      * @return string        customized wp_title()
+     * @link   https://developer.wordpress.org/reference/functions/wp_title/
      * @static
      */
-    public static function custom_head_title($title)
+    public static function customHeadTitle($title)
     {
         $site = [
             'name' => get_bloginfo('name'),
