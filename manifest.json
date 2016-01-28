@@ -71,5 +71,8 @@
       "before_title": "<h2 class=\"widget__title\">",
       "after_title": "</h2>"
     }
+  ],
+  "widgets": [
+    "Hwlo\\Raccoon\\WidgetExample"
   ]
 }

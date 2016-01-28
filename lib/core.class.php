@@ -27,7 +27,7 @@ use Symfony\Component\Debug\Debug;
 class Core
 {
     /**
-     * Theme namespace, used mainly for translation methods (_e, __, _n)
+     * Theme namespace, used mainly for translation methods (_e, __, _n, _x)
      *
      * @var    string
      * @static
@@ -80,10 +80,11 @@ class Core
         // enable theme features asked in the manifest
         self::_loadThemeSupport();
 
-        // register navigations, custom post types and sidebars
+        // register navigations, custom post types, sidebars and widgets
         self::_loadNavigations();
         self::_loadCustomPostTypes();
         self::_loadSidebars();
+        self::_loadWidgets();
     }
 
     /**
@@ -196,7 +197,11 @@ class Core
                         // add a gettext context for some keys
                         // or simply translate a string
                         if (in_array($key, $contextKeysList)) {
-                            $labels[$key] = _x($value, $contextKeys[$key], self::$namespace);
+                            $labels[$key] = _x(
+                                $value,
+                                $contextKeys[$key],
+                                self::$namespace
+                            );
                         } else {
                             $labels[$key] = __($value, self::$namespace);
                         }
@@ -255,6 +260,24 @@ class Core
 
                 // sidebar registration
                 register_sidebar($args);
+            }
+        }
+    }
+
+    /**
+     * Register all widgets from the manifest
+     *
+     * @return void
+     * @static
+     * @link   https://codex.wordpress.org/Function_Reference/register_widget
+     */
+    private static function _loadWidgets()
+    {
+        if (array_key_exists('widgets', self::$manifest)) {
+            $widgets = self::$manifest['widgets'];
+
+            foreach ($widgets as $widget) {
+                register_widget($widget);
             }
         }
     }
