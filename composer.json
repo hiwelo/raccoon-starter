@@ -52,6 +52,9 @@
         "npm update || true",
         "composer dump-autoload --optimize"
       ],
+      "autoload": [
+        "composer dump-autoload --optimize"
+      ],
       "test": [
         "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --ignore=vendor/,docs/,node_modules/ .",
         "jshint --reporter=node_modules/jshint-stylish --exclude-path=.gitignore ."
