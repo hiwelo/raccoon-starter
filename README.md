@@ -28,7 +28,7 @@ watch jobs.
 ### Vendor update
 Regularly, don't forget to update all dependencies (composer & npm) with:
 ```
-composer vendor-update
+composer update
 ```
 
 ### Before to commit
