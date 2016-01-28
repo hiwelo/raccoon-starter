@@ -243,10 +243,7 @@ class Core
         if (array_key_exists('sidebars', self::$manifest)) {
             $sidebars = self::$manifest['sidebars'];
 
-            foreach ($sidebars as $id => $args) {
-                // add id to arguments array
-                $args['id'] = $id;
-
+            foreach ($sidebars as $args) {
                 // parsing arguments to add translation for some keys
                 foreach ($args as $key => $value) {
                     $i18nKeys = ['name', 'description'];
