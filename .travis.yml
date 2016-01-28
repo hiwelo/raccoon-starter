@@ -3,28 +3,15 @@ language:
   - php
   - node_js
 
-matrix:
-  allow_failures:
-    - php: nightly
-
 cache:
   directories:
     - node_modules
+    - vendor
 
 install:
   - npm install jshint jshint-stylish
-  - npm install jscs
-  - npm install babel-cli babel-core babel-preset-es2015
-  - composer self-update && composer --version
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer global require squizlabs/php_codesniffer
-
-before_script:
-  - babel gulpfile.babel.js --out-file gulpfile.js
-  - npm install del gulp gulp-load-plugins gulp-jshint gulp-sync browser-sync yargs
+  - composer install
 
 script:
-  - gulp test
-  - jshint assets/src/js/*.js
-  - jscs assets/src/js/
-  - phpcs --standard=ruleset.xml --extensions=php -n -s .
+  - composer test
