@@ -65,20 +65,23 @@ class Core
         $file = file_get_contents($file);
         self::$manifest = json_decode($file, true);
 
-        // we load environment status
+        // load environment status
         self::$env_status = $_ENV['WP_ENV'];
 
-        // we load theme namespace, used mainly for translation methods
+        // load theme namespace, used mainly for translation methods
         self::$namespace = self::$manifest['namespace'];
 
-        // we load if necessary all debug methods
+        // load if necessary all debug methods
         self::_loadDebug();
 
-        // we make this theme available for translation
+        // make this theme available for translation
         self::_i18nReady();
 
-        // we enable theme features asked in the manifest
+        // enable theme features asked in the manifest
         self::_loadThemeSupport();
+
+        // register navigations and custom post types
+        self::_loadNavigations();
     }
 
     /**
@@ -118,24 +121,26 @@ class Core
      */
     private static function _loadThemeSupport()
     {
-        $supports = self::$manifest['theme-support'];
+        if (array_key_exists('theme-support', self::$manifest)) {
+            $supports = self::$manifest['theme-support'];
 
-        foreach ($supports as $key => $value) {
-            // we parse "true" string to a boolean if necessary
-            if ($value === "true") {
-                $value = boolval($value);
-            }
-
-            switch (gettype($value)) {
-            case "boolean":
-                if ($value === true) {
-                    add_theme_support($key);
+            foreach ($supports as $key => $value) {
+                // we parse "true" string to a boolean if necessary
+                if ($value === "true") {
+                    $value = boolval($value);
                 }
-                break;
 
-            case "array":
-                add_theme_support($key, $value);
-                break;
+                switch (gettype($value)) {
+                case "boolean":
+                    if ($value === true) {
+                        add_theme_support($key);
+                    }
+                    break;
+
+                case "array":
+                    add_theme_support($key, $value);
+                    break;
+                }
             }
         }
     }
@@ -149,10 +154,14 @@ class Core
      */
     private static function _loadNavigations()
     {
-        $navigations = self::$manifest['navigations'];
+        if (array_key_exists('navigations', self::$manifest)) {
+            $navigations = self::$manifest['navigations'];
 
-        foreach ($navigations as $location => $description) {
-            register_nav_menu($location, __($description, self::$namespace));
+            foreach ($navigations as $location => $description) {
+                register_nav_menu($location, __($description, self::$namespace));
+            }
+        }
+    }
         }
     }
 }
