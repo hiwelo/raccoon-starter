@@ -82,6 +82,7 @@ class Core
 
         // register navigations and custom post types
         self::_loadNavigations();
+        self::_loadCustomPostTypes();
     }
 
     /**
@@ -162,6 +163,90 @@ class Core
             }
         }
     }
+
+    /**
+     * Register all custom post types from the manifest
+     *
+     * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/register_post_type
+     * @static
+     */
+    private static function _loadCustomPostTypes()
+    {
+        if (array_key_exists('custom-post-types', self::$manifest)) {
+            $customPostTypes = self::$manifest['custom-post-types'];
+
+            foreach ($customPostTypes as $postType => $args) {
+                // parsing labels values
+                if (array_key_exists('labels', $args)) {
+                    $labels = $args['labels'];
+
+                    foreach ($labels as $key => $value) {
+                        switch ($key) {
+                        case 'name':
+                            $labels[$key] = _x(
+                                $value,
+                                'post type general name',
+                                self::$namespace
+                            );
+                            break;
+
+                        case 'singular_name':
+                            $labels[$key] = _x(
+                                $value,
+                                'post type singular name',
+                                self::$namespace
+                            );
+                            break;
+
+                        case 'menu_name':
+                            $labels[$key] = _x(
+                                $value,
+                                'admin menu',
+                                self::$namespace
+                            );
+                            break;
+
+                        case 'name_admin_bar':
+                            $labels[$key] = _x(
+                                $value,
+                                'add new on admin bar',
+                                self::$namespace
+                            );
+                            break;
+
+                        default:
+                            $labels[$key] = __($value, self::$namespace);
+                            break;
+                        }
+                    }
+                    $args['labels'] = $labels;
+                }
+
+                // parsing label value
+                if (array_key_exists('label', $args)) {
+                    $args['label'] = __($args['label'], self::$namespace);
+                }
+
+                // parsing description value
+                if (array_key_exists('description', $args)) {
+                    $args['description'] = __(
+                        $args['description'],
+                        self::$namespace
+                    );
+                }
+
+                // replace "true" string value to a real boolean
+                $stringBooleans = array_keys($args, "true");
+                if ($stringBooleans) {
+                    foreach ($stringBooleans as $key) {
+                        $args[$key] = true;
+                    }
+                }
+
+                // custom post type registration
+                register_post_type($postType, $args);
+            }
         }
     }
 }
