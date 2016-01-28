@@ -181,43 +181,23 @@ class Core
                 if (array_key_exists('labels', $args)) {
                     $labels = $args['labels'];
 
+                    // parsing arguments to add translation
                     foreach ($labels as $key => $value) {
-                        switch ($key) {
-                        case 'name':
-                            $labels[$key] = _x(
-                                $value,
-                                'post type general name',
-                                self::$namespace
-                            );
-                            break;
+                        // Keys which required a gettext with translation
+                        $contextKeys = [
+                            'name' => 'post type general name',
+                            'singular_name' => 'post type singular name',
+                            'menu_name' => 'admin menu',
+                            'name_admin_bar' => 'add new on admin bar',
+                        ];
+                        $contextKeysList = array_keys($contextKeys);
 
-                        case 'singular_name':
-                            $labels[$key] = _x(
-                                $value,
-                                'post type singular name',
-                                self::$namespace
-                            );
-                            break;
-
-                        case 'menu_name':
-                            $labels[$key] = _x(
-                                $value,
-                                'admin menu',
-                                self::$namespace
-                            );
-                            break;
-
-                        case 'name_admin_bar':
-                            $labels[$key] = _x(
-                                $value,
-                                'add new on admin bar',
-                                self::$namespace
-                            );
-                            break;
-
-                        default:
+                        // add a gettext context for some keys
+                        // or simply translate a string
+                        if (in_array($key, $contextKeysList)) {
+                            $labels[$key] = _x($value, $contextKeys[$key], self::$namespace);
+                        } else {
                             $labels[$key] = __($value, self::$namespace);
-                            break;
                         }
                     }
                     $args['labels'] = $labels;
