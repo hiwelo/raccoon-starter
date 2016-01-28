@@ -11,7 +11,7 @@ cache:
 install:
   - npm install jshint jshint-stylish
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer install
+  - composer install --no-scripts
 
 script:
   - composer test

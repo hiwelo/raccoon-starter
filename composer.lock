@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c6658e6bc30f5cec27d19f7a527f1b55",
-    "content-hash": "203edfc5f895b26b97b0bfcd2286eb6a",
+    "hash": "70989da733a04bfcdfd6772391693d2b",
+    "content-hash": "a4a7921615369dc7583c4d65fa181a34",
     "packages": [
         {
             "name": "composer/installers",
@@ -104,128 +104,6 @@
                 "zikula"
             ],
             "time": "2016-01-27 12:54:22"
-        },
-        {
-            "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "1289d16209491b584839022f29257ad859b8532d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
-                "reference": "1289d16209491b584839022f29257ad859b8532d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-mbstring": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for the Mbstring extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "mbstring",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2016-01-20 09:13:37"
-        },
-        {
-            "name": "symfony/var-dumper",
-            "version": "v3.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "87db8700deb12ba2b65e858f656a1f885530bcb0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/87db8700deb12ba2b65e858f656a1f885530bcb0",
-                "reference": "87db8700deb12ba2b65e858f656a1f885530bcb0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "symfony/polyfill-mbstring": "~1.0"
-            },
-            "require-dev": {
-                "twig/twig": "~1.20|~2.0"
-            },
-            "suggest": {
-                "ext-symfony_debug": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "Resources/functions/dump.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Component\\VarDumper\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony mechanism for exploring and dumping PHP variables",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "debug",
-                "dump"
-            ],
-            "time": "2015-12-05 11:13:14"
         }
     ],
     "packages-dev": [
@@ -1948,6 +1826,65 @@
             "time": "2016-01-14 08:26:52"
         },
         {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "1289d16209491b584839022f29257ad859b8532d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
+                "reference": "1289d16209491b584839022f29257ad859b8532d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-01-20 09:13:37"
+        },
+        {
             "name": "symfony/process",
             "version": "v2.8.2",
             "source": {
@@ -2180,6 +2117,69 @@
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
             "time": "2016-01-12 17:46:01"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "87db8700deb12ba2b65e858f656a1f885530bcb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/87db8700deb12ba2b65e858f656a1f885530bcb0",
+                "reference": "87db8700deb12ba2b65e858f656a1f885530bcb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "twig/twig": "~1.20|~2.0"
+            },
+            "suggest": {
+                "ext-symfony_debug": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "time": "2015-12-05 11:13:14"
         },
         {
             "name": "twig/twig",
@@ -2974,8 +2974,6 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=5.6.0"
-    },
+    "platform": [],
     "platform-dev": []
 }
