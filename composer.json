@@ -42,7 +42,7 @@
       ],
       "post-install-cmd": [
         "bash contrib/setup.sh",
-        "npm install",
+        "npm install || true",
         "composer dump-autoload --optimize"
       ],
       "pre-update-cmd": [
@@ -50,7 +50,7 @@
       ],
       "post-update-cmd": [
         "bash contrib/setup.sh",
-        "npm update",
+        "npm update || true",
         "composer dump-autoload --optimize"
       ],
       "test": [
