@@ -22,13 +22,18 @@
       "source": "https://github.com/hiwelo/raccoon/"
     },
     "require": {
-      "php": ">=5.6.0",
       "composer/installers": "~1.0"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^2.5",
-        "symfony/debug": "^3.0",
-        "phpdocumentor/phpdocumentor": "^2.8"
+      "squizlabs/php_codesniffer": "^2.5",
+      "symfony/debug": "^3.0",
+      "phpdocumentor/phpdocumentor": "^2.8",
+      "symfony/var-dumper": "^3.0"
+    },
+    "autoload": {
+      "psr-4": {
+        "Hwlo\\Raccoon\\": "lib/"
+      }
     },
     "scripts": {
       "pre-install-cmd": [
@@ -36,20 +41,22 @@
       ],
       "post-install-cmd": [
         "bash contrib/setup.sh",
-        "npm install"
+        "npm install || true",
+        "composer dump-autoload --optimize"
       ],
       "pre-update-cmd": [
         "git pull"
       ],
       "post-update-cmd": [
         "bash contrib/setup.sh",
-        "npm update"
+        "npm update || true",
+        "composer dump-autoload --optimize"
       ],
       "test": [
         "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --ignore=vendor/,docs/,node_modules/ .",
-        "./vendor/squizlabs/php_codesniffer/scripts/phpcbf --extensions=php --ignore=vendor/,docs/,node_modules/ .",
-        "npm test"
+        "jshint --reporter=node_modules/jshint-stylish --exclude-path=.gitignore ."
       ],
+      "phpcbf": ["./vendor/squizlabs/php_codesniffer/scripts/phpcbf --extensions=php --ignore=vendor/,docs/,node_modules/ ."],
       "documentation": [
         "./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d . -t ./docs/api/ --ignore=vendor/,docs/,node_modules/"
       ],
