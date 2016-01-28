@@ -115,7 +115,7 @@ class Core
      * @return void
      * @static
      */
-    public static function _loadThemeSupport()
+    private static function _loadThemeSupport()
     {
         $supports = self::$manifest['theme-support'];
 
