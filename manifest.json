@@ -17,5 +17,9 @@
       "gallery",
       "search-form"
     ]
+  },
+  "navigations": {
+    "primary": "Main navigation",
+    "social": "Social links"
   }
 }

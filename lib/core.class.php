@@ -113,6 +113,7 @@ class Core
      * Declare all features asked in the manifest
      *
      * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/add_theme_support
      * @static
      */
     private static function _loadThemeSupport()
@@ -136,6 +137,22 @@ class Core
                 add_theme_support($key, $value);
                 break;
             }
+        }
+    }
+
+    /**
+     * Register all navigations from the manifest
+     *
+     * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/register_nav_menu
+     * @static
+     */
+    private static function _loadNavigations()
+    {
+        $navigations = self::$manifest['navigations'];
+
+        foreach ($navigations as $location => $description) {
+            register_nav_menu($location, __($description, self::$namespace));
         }
     }
 }
