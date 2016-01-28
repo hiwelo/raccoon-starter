@@ -1,0 +1,21 @@
+{
+  "namespace": "raccoon",
+  "theme-support": {
+    "title-tag": true,
+    "post-thumbnail": true,
+    "automatic-feed-links": true,
+    "post-formats": [
+      "link",
+      "quote",
+      "audio",
+      "video"
+    ],
+    "html5": [
+      "caption",
+      "comment-form",
+      "comment-list",
+      "gallery",
+      "search-form"
+    ]
+  }
+}
