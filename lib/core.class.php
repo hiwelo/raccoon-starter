@@ -80,9 +80,10 @@ class Core
         // enable theme features asked in the manifest
         self::_loadThemeSupport();
 
-        // register navigations and custom post types
+        // register navigations, custom post types and sidebars
         self::_loadNavigations();
         self::_loadCustomPostTypes();
+        self::_loadSidebars();
     }
 
     /**
@@ -226,6 +227,37 @@ class Core
 
                 // custom post type registration
                 register_post_type($postType, $args);
+            }
+        }
+    }
+
+    /**
+     * Register all sidebars from the manifest
+     *
+     * @return void
+     * @static
+     * @link   https://codex.wordpress.org/Function_Reference/register_sidebar
+     */
+    private static function _loadSidebars()
+    {
+        if (array_key_exists('sidebars', self::$manifest)) {
+            $sidebars = self::$manifest['sidebars'];
+
+            foreach ($sidebars as $id => $args) {
+                // add id to arguments array
+                $args['id'] = $id;
+
+                // parsing arguments to add translation for some keys
+                foreach ($args as $key => $value) {
+                    $i18nKeys = ['name', 'description'];
+
+                    if (in_array($key, $i18nKeys)) {
+                        $args[$key] = __($value, self::$namespace);
+                    }
+                }
+
+                // sidebar registration
+                register_sidebar($args);
             }
         }
     }

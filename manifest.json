@@ -59,5 +59,17 @@
         "post-formats"
       ]
     }
-  }
+  },
+  "sidebars": [
+    {
+      "name": "Sidebar name",
+      "id": "unique-sidebar-id",
+      "description": "Description.",
+      "class": "sidebarClassName",
+      "before_widget": "<li id=\"%1$s\" class=\"widget %2$s\">",
+      "after_widget": "</li>",
+      "before_title": "<h2 class=\"widget__title\">",
+      "after_title": "</h2>"
+    }
+  ]
 }
