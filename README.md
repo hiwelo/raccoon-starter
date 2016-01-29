@@ -174,7 +174,7 @@ Here is the kind of statements that you can set up in the `manifest.json` file:
 }
 ```
 
-### Navigation
+### Navigations
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up navigations with the `manifest.json` file.
 
 Each navigation must have a location and a readable description like in the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_nav_menu).
