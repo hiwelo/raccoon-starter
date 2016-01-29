@@ -111,10 +111,10 @@ composer autoload
 When a raccoon work, he likes to make sure his work can be understood by all. So he writes scripts which are conform to standards used by the PHP community.
 
 **[Raccoon](https://github.com/hiwelo/raccoon/)** uses [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php) for its tests.
-Each modification must respect PEAR Coding Standards to be committed.
+Each modification must make a successful _PEAR_ syntax check to be committed.
 So, keep in mind that scripts documentation is required by [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php)!
 
-You can run at any time a control on all PHP & JavaScript files with:
+You can run at any time a test control on all PHP & JavaScript files with:
 ```
 composer test
 ```
