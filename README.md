@@ -210,3 +210,16 @@ For example if you want to register the same sidebar as the [WordPress documenta
   ]
 }
 ```
+
+### Widgets
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up widgets with the `manifest.json` file.
+
+Each widget must consist of a specific OPP PHP Class like described in the [WordPress documentation](https://codex.wordpress.org/Widgets_API).
+So, for a widget registration you just have to add the widget classname in the `manifest.json`, with its complete namespace like that:
+```json
+{
+  "widgets": [
+    "Hwlo\\Raccoon\\WidgetExample"
+  ]
+}
+```
