@@ -32,7 +32,7 @@ class Core
      * @var    string
      * @static
      */
-    public static $namespace = '';
+    public static $namespace = 'raccoon';
 
     /**
      * Manifest informations for this theme
@@ -69,7 +69,9 @@ class Core
         self::$env_status = $_ENV['WP_ENV'];
 
         // load theme namespace, used mainly for translation methods
-        self::$namespace = self::$manifest['namespace'];
+        if (!empty(self::$manifest['namespace'])) {
+            self::$namespace = self::$manifest['namespace'];
+        }
 
         // load if necessary all debug methods
         self::_loadDebug();
