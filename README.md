@@ -112,6 +112,7 @@ When a raccoon work, he likes to make sure his work can be understood by all. So
 
 **[Raccoon](https://github.com/hiwelo/raccoon/)** uses [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php) for its tests.
 Each modification must respect PEAR Coding Standards to be committed.
+So, keep in mind that scripts documentation is required by [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php)!
 
 You can run at any time a control on all PHP & JavaScript files with:
 ```
