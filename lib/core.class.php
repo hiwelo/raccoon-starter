@@ -8,7 +8,7 @@
  * @package  Raccoon
  * @author   Damien Senger <hi@hiwelo.co>
  * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
- * @link     https://codex.wordpress.org/Functions_File_Explained
+ * @link     ./docs/api/classes/Hwlo.Raccoon.Core.html
  */
 namespace Hwlo\Raccoon;
 use Symfony\Component\Debug\Debug;
@@ -22,7 +22,7 @@ use Symfony\Component\Debug\Debug;
  * @package  Raccoon
  * @author   Damien Senger <hi@hiwelo.co>
  * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
- * @link     https://codex.wordpress.org/Functions_File_Explained
+ * @link     ./docs/api/classes/Hwlo.Raccoon.Core.html
  */
 class Core
 {
@@ -93,7 +93,7 @@ class Core
      * Run all debug methods & scripts if we're in a development environment
      *
      * @return void
-     * @see    \Symfony\Component\Debug\Debug\Debug::enable()
+     * @uses   \Symfony\Component\Debug\Debug::enable()
      * @static
      */
     private static function _loadDebug()
