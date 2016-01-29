@@ -19,6 +19,8 @@
     - [WordPress theme namespace](#wordpress-theme-namespace)
     - [Navigations](#navigations)
     - [Custom Post Types](#custom-post-types)
+    - [Sidebars](#sidebars)
+    - [Widgets](#widgets)
 
 
 ## Requirements
@@ -123,8 +125,9 @@ To define a specific namespace, you have to update `manifest.json` like that:
 If empty or undefined, the default namespace will be `raccoon`.
 
 ### Navigation
-You can set up all navigations in the `manifest.json` file.
-Each navigation must have a slug and a readable name.
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up navigations with the `manifest.json` file.
+
+Each navigation must have a location and a readable description like in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_nav_menu).
 
 For example if you want to register two navigations (a primary navigation and a list of social networks), you have to update `manifest.json` like that:
 ```json
@@ -137,7 +140,7 @@ For example if you want to register two navigations (a primary navigation and a 
 ```
 
 ### Custom Post Types
-You can set up custom post types in the `manifest.json` file.
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up custom post types with the `manifest.json` file.
 
 Each custom post type must have a title and an array of arguments. All arguments described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_post_type) can be used in the `manifest.json` file.
 
@@ -182,5 +185,28 @@ For example if you want to register the same post type as the [WordPress documen
       ]
     }
   }
+}
+```
+
+### Sidebars
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up sidebars with the `manifest.json` file.
+
+Each sidebar must have an array of arguments. All arguments described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_sidebar) can be used in the `manifest.json` file.
+
+For example if you want to register the same sidebar as the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_sidebar), you have to update `manifest.json` like that:
+```json
+{
+  "sidebars": [
+    {
+      "name": "Sidebar name",
+      "id": "unique-sidebar-id",
+      "description": "Description.",
+      "class": "sidebarClassName",
+      "before_widget": "<li id=\"%1$s\" class=\"widget %2$s\">",
+      "after_widget": "</li>",
+      "before_title": "<h2 class=\"widget__title\">",
+      "after_title": "</h2>"
+    }
+  ]
 }
 ```
