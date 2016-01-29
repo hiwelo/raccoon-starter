@@ -93,6 +93,8 @@ class Core
      * Run all debug methods & scripts if we're in a development environment
      *
      * @return void
+     * @see    \Symfony\Component\Debug\Debug\Debug::enable()
+     * @static
      */
     private static function _loadDebug()
     {
@@ -107,6 +109,7 @@ class Core
      * Theme translation activation (.po & .mo)
      *
      * @return void
+     * @link   https://codex.wordpress.org/Function_Reference/load_theme_textdomain
      * @static
      */
     private static function _i18nReady()
