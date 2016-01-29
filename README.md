@@ -30,6 +30,7 @@ For its development, **[Raccoon](https://github.com/hiwelo/raccoon/)** requires:
   - PHP >= 5.6
   - Composer
   - Node.js with npm for package management
+  - WordPress >= 4.4
 
 
 ## Installation
