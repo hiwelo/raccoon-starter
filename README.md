@@ -125,11 +125,11 @@ composer phpcbf
 ```
 
 
-## How a raccoon can help you with __WordPress__
+## How a raccoon can help you with _WordPress_
 
 ### Configuration manifest
 To avoid multiple initialization functions, **[Raccoon](https://github.com/hiwelo/raccoon/)** uses a _JSON_ configuration file: `manifest.json`.
-In this file you can set all features proposed by __WordPress__ to its themes.
+In this file you can set all features proposed by _WordPress_ to its themes.
 
 ### _WordPress_ theme namespace
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can define a specific namespace for this theme.
