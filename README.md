@@ -15,8 +15,10 @@
   - [How to code with a raccoon](#how-to-code-with-a-raccoon)
     - [OOP PHP Class](#oop-php-class)
   - [How a raccoon can help you with WordPress](#how-a-raccoon-can-help-you-with-wordpress)
-    - [A configuration manifest](#a-configuration-manifest)
+    - [Configuration manifest](#configuration-manifest)
     - [WordPress theme namespace](#wordpress-theme-namespace)
+    - [Navigations](#navigations)
+    - [Custom Post Types](#custom-post-types)
 
 
 ## Requirements
@@ -104,7 +106,7 @@ composer autoload
 
 ## How a raccoon can help you with _WordPress_
 
-### A configuration manifest
+### Configuration manifest
 To avoid multiple initialization functions, **[Raccoon](https://github.com/hiwelo/raccoon/)** uses a _JSON_ configuration file: `manifest.json`.
 In this file you can set all features proposed by _WordPress_ to its themes.
 
@@ -119,3 +121,66 @@ To define a specific namespace, you have to update `manifest.json` like that:
 }
 ```
 If empty or undefined, the default namespace will be `raccoon`.
+
+### Navigation
+You can set up all navigations in the `manifest.json` file.
+Each navigation must have a slug and a readable name.
+
+For example if you want to register two navigations (a primary navigation and a list of social networks), you have to update `manifest.json` like that:
+```json
+{
+  "navigations": {
+    "primary": "Main navigation",
+    "social": "Social links"
+  }
+}
+```
+
+### Custom Post Types
+You can set up custom post types in the `manifest.json` file.
+
+Each custom post type must have a title and an array of arguments. All arguments described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_post_type) can be used in the `manifest.json` file.
+
+For example if you want to register the same post type as the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_post_type#_edit_link), you have to update `manifest.json` like that:
+```json
+{
+  "custom-post-types": {
+    "books": {
+      "labels": {
+        "name": "Books",
+        "singular_name": "Book",
+        "menu_name": "Books",
+        "name_admin_bar": "Book",
+        "add_new": "Add New",
+        "add_new_item": "Add New Book",
+        "new_item": "New Book",
+        "edit_item": "Edit Book",
+        "view_item": "View Book",
+        "all_items": "All Books",
+        "search_items": "Search Books",
+        "parent_item_colon": "Parent Books:",
+        "not_found": "No books found.",
+        "not_found_in_trash": "No books found in Trash."
+      },
+      "description": "Description.",
+      "public": "true",
+      "publicly_queryable": "true",
+      "query_var": "true",
+      "rewrite": {
+        "slug": "book"
+      },
+      "menu_icon": "dashicons-editor-paragraph",
+      "supports": [
+        "title",
+        "editor",
+        "author",
+        "thumbnail",
+        "excerpt",
+        "custom-fields",
+        "revisions",
+        "post-formats"
+      ]
+    }
+  }
+}
+```
