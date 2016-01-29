@@ -14,6 +14,7 @@
     - [Documentation](#documentation)
   - [How to code with a raccoon](#how-to-code-with-a-raccoon)
     - [OOP PHP Class](#oop-php-class)
+    - [Raccoon loves PEAR Coding Standards](#raccoon-loves-pear-coding-standards)
   - [How a raccoon can help you with WordPress](#how-a-raccoon-can-help-you-with-wordpress)
     - [Configuration manifest](#configuration-manifest)
     - [WordPress theme namespace](#wordpress-theme-namespace)
@@ -104,6 +105,22 @@ For example, if you want to register a custom namespace like `Hwlo\Raccoon\Custo
 For each new created class, you may need to regenerate the `./vendor/autoload.php` file. For this operation, please run:
 ```
 composer autoload
+```
+
+### Raccoon loves PEAR Coding Standards
+When a raccoon work, he likes to make sure his work can be understood by all. So he writes scripts which are conform to standards used by the PHP community.
+
+**[Raccoon](https://github.com/hiwelo/raccoon/)** uses [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php) for its tests.
+Each modification must respect PEAR Coding Standards to be committed.
+
+You can run at any time a control on all PHP & JavaScript files with:
+```
+composer test
+```
+
+Some errors on PHP files can be automatically fixed by `phpcbf`. To do so, run:
+```
+composer phpcbf
 ```
 
 
