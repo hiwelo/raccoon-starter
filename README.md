@@ -16,6 +16,7 @@
     - [OOP PHP Class](#oop-php-class)
   - [How a raccoon can help you with WordPress](#how-a-raccoon-can-help-you-with-wordpress)
     - [A configuration manifest](#a-configuration-manifest)
+    - [WordPress theme namespace](#wordpress-theme-namespace)
 
 
 ## Requirements
