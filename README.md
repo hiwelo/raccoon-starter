@@ -17,6 +17,7 @@
   - [How a raccoon can help you with WordPress](#how-a-raccoon-can-help-you-with-wordpress)
     - [Configuration manifest](#configuration-manifest)
     - [WordPress theme namespace](#wordpress-theme-namespace)
+    - [Theme supports](#theme-support)
     - [Navigations](#navigations)
     - [Custom Post Types](#custom-post-types)
     - [Sidebars](#sidebars)
@@ -123,6 +124,36 @@ To define a specific namespace, you have to update `manifest.json` like that:
 }
 ```
 If empty or undefined, the default namespace will be `raccoon`.
+
+### Theme support
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up all theme features with the `manifest.json` file.
+
+All features described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/add_theme_support) can be registered with or without arguments.
+Considering the JSON format, a feature requires a least a boolean.
+
+Here is the kind of statements that you can set up in the `manifest.json` file:
+```json
+{
+  "theme-support": {
+    "title-tag": true,
+    "post-thumbnail": true,
+    "automatic-feed-links": true,
+    "post-formats": [
+      "link",
+      "quote",
+      "audio",
+      "video"
+    ],
+    "html5": [
+      "caption",
+      "comment-form",
+      "comment-list",
+      "gallery",
+      "search-form"
+    ]
+  }
+}
+```
 
 ### Navigation
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up navigations with the `manifest.json` file.
