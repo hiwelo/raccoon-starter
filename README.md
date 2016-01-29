@@ -1,5 +1,5 @@
 # Raccoon WordPress starter
-**[Raccoon](https://github.com/hiwelo/raccoon/)** is a _WordPress_ starter theme based on Composer & NPM & Babel (ES 2015 preset) & Gulp & Knacss.
+**[Raccoon](https://github.com/hiwelo/raccoon/)** is a [_WordPress_](https://wordpress.org/) starter theme based on Composer & NPM & Babel (ES 2015 preset) & Gulp & Knacss.
 
 [![Build Status](https://travis-ci.org/hiwelo/raccoon.svg?branch=develop)](https://travis-ci.org/hiwelo/raccoon)
 
