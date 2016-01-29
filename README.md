@@ -1,5 +1,5 @@
 # Raccoon WordPress starter
-**[Raccoon](https://github.com/hiwelo/raccoon/)** is a personal WordPress starter theme based on Composer, NPM, Babel (ES 2015), Gulp and Knacss
+**[Raccoon](https://github.com/hiwelo/raccoon/)** is a _WordPress_ starter theme based on Composer & NPM & Babel (ES 2015 preset) & Gulp & Knacss.
 
 [![Build Status](https://travis-ci.org/hiwelo/raccoon.svg?branch=develop)](https://travis-ci.org/hiwelo/raccoon)
 
@@ -15,9 +15,9 @@
   - [How to code with a raccoon](#how-to-code-with-a-raccoon)
     - [OOP PHP Class](#oop-php-class)
     - [Raccoon loves PEAR Coding Standards](#raccoon-loves-pear-coding-standards)
-  - [How a raccoon can help you with WordPress](#how-a-raccoon-can-help-you-with-wordpress)
+  - [How a raccoon can help you with _WordPress_](#how-a-raccoon-can-help-you-with-wordpress)
     - [Configuration manifest](#configuration-manifest)
-    - [WordPress theme namespace](#wordpress-theme-namespace)
+    - [_WordPress_ theme namespace](#wordpress-theme-namespace)
     - [Theme supports](#theme-support)
     - [Navigations](#navigations)
     - [Custom Post Types](#custom-post-types)
@@ -81,7 +81,7 @@ The generated documentation is available in the `./docs/api/` folder.
 ## How to code with a raccoon
 
 ### OOP PHP Class
-**[Raccoon](https://github.com/hiwelo/raccoon/)** is an OOP-based WordPress template.
+**[Raccoon](https://github.com/hiwelo/raccoon/)** is an OOP-based _WordPress_ template.
 All **[Raccoon](https://github.com/hiwelo/raccoon/)**'s classes are placed within the namespace `Hwlo\Raccoon\` and you can find them in the `./lib` directory.
 
 Any custom class that you can create should be placed in a specific namespace.
@@ -125,13 +125,13 @@ composer phpcbf
 ```
 
 
-## How a raccoon can help you with _WordPress_
+## How a raccoon can help you with __WordPress__
 
 ### Configuration manifest
 To avoid multiple initialization functions, **[Raccoon](https://github.com/hiwelo/raccoon/)** uses a _JSON_ configuration file: `manifest.json`.
-In this file you can set all features proposed by _WordPress_ to its themes.
+In this file you can set all features proposed by __WordPress__ to its themes.
 
-### WordPress theme namespace
+### _WordPress_ theme namespace
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can define a specific namespace for this theme.
 This namespace will be mainly used by string translation methods like `__()` or `_e()` or `_x()` or `_n()`.
 
@@ -146,7 +146,7 @@ If empty or undefined, the default namespace will be `raccoon`.
 ### Theme support
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up all theme features with the `manifest.json` file.
 
-All features described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/add_theme_support) can be registered with or without arguments.
+All features described in the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/add_theme_support) can be registered with or without arguments.
 Considering the JSON format, a feature requires a least a boolean.
 
 Here is the kind of statements that you can set up in the `manifest.json` file:
@@ -176,7 +176,7 @@ Here is the kind of statements that you can set up in the `manifest.json` file:
 ### Navigation
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up navigations with the `manifest.json` file.
 
-Each navigation must have a location and a readable description like in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_nav_menu).
+Each navigation must have a location and a readable description like in the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_nav_menu).
 
 For example if you want to register two navigations (a primary navigation and a list of social networks), you have to update `manifest.json` like that:
 ```json
@@ -191,9 +191,9 @@ For example if you want to register two navigations (a primary navigation and a 
 ### Custom Post Types
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up custom post types with the `manifest.json` file.
 
-Each custom post type must have a title and an array of arguments. All arguments described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_post_type) can be used in the `manifest.json` file.
+Each custom post type must have a title and an array of arguments. All arguments described in the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_post_type) can be used in the `manifest.json` file.
 
-For example if you want to register the same post type as the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_post_type#_edit_link), you have to update `manifest.json` like that:
+For example if you want to register the same post type as the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_post_type#_edit_link), you have to update `manifest.json` like that:
 ```json
 {
   "custom-post-types": {
@@ -240,9 +240,9 @@ For example if you want to register the same post type as the [WordPress documen
 ### Sidebars
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up sidebars with the `manifest.json` file.
 
-Each sidebar must have an array of arguments. All arguments described in the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_sidebar) can be used in the `manifest.json` file.
+Each sidebar must have an array of arguments. All arguments described in the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_sidebar) can be used in the `manifest.json` file.
 
-For example if you want to register the same sidebar as the [WordPress documentation](https://codex.wordpress.org/Function_Reference/register_sidebar), you have to update `manifest.json` like that:
+For example if you want to register the same sidebar as the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_sidebar), you have to update `manifest.json` like that:
 ```json
 {
   "sidebars": [
@@ -263,7 +263,7 @@ For example if you want to register the same sidebar as the [WordPress documenta
 ### Widgets
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up widgets with the `manifest.json` file.
 
-Each widget must consist of a specific OPP PHP Class like described in the [WordPress documentation](https://codex.wordpress.org/Widgets_API).
+Each widget must consist of a specific OPP PHP Class like described in the [_WordPress_ documentation](https://codex.wordpress.org/Widgets_API).
 So, for a widget registration you just have to add the widget classname in the `manifest.json`, with its complete namespace like that:
 ```json
 {
