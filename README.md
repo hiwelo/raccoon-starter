@@ -107,7 +107,7 @@ For each new created class, you may need to regenerate the `./vendor/autoload.ph
 composer autoload
 ```
 
-### Raccoon loves PEAR Coding Standards
+### **[Raccoon](https://github.com/hiwelo/raccoon/)** loves PEAR Coding Standards
 When a raccoon work, he likes to make sure his work can be understood by all. So he writes scripts which are conform to standards used by the PHP community.
 
 **[Raccoon](https://github.com/hiwelo/raccoon/)** uses [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php) for its tests.
@@ -132,7 +132,7 @@ To avoid multiple initialization functions, **[Raccoon](https://github.com/hiwel
 In this file you can set all features proposed by _WordPress_ to its themes.
 
 ### WordPress theme namespace
-With Raccoon, you can define a specific namespace for this theme.
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can define a specific namespace for this theme.
 This namespace will be mainly used by string translation methods like `__()` or `_e()` or `_x()` or `_n()`.
 
 To define a specific namespace, you have to update `manifest.json` like that:
