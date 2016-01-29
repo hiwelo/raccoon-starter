@@ -1,5 +1,5 @@
 # Raccoon WordPress starter [![Build Status](https://travis-ci.org/hiwelo/raccoon.svg?branch=develop)](https://travis-ci.org/hiwelo/raccoon)
-Raccoon is a personal WordPress starter theme based on Composer, NPM, Babel (ES 2015), Gulp and Knacss
+**[Raccoon](https://github.com/hiwelo/raccoon/)** is a personal WordPress starter theme based on Composer, NPM, Babel (ES 2015), Gulp and Knacss
 
 
 ## Summary
@@ -17,7 +17,7 @@ Raccoon is a personal WordPress starter theme based on Composer, NPM, Babel (ES 
 
 
 ## Requirements
-For its development, this project require:
+For its development, **[Raccoon](https://github.com/hiwelo/raccoon/)** requires:
   - PHP >= 5.6
   - Composer
   - Node.js with npm for package management
@@ -72,8 +72,8 @@ The generated documentation is available in the `./docs/api/` folder.
 ## How to code with a raccoon
 
 ### OOP PHP Class
-_Raccoon_ is an OOP-based WordPress template.
-All _Raccoon_'s classes are placed within the namespace `Hwlo\Raccoon\` and you can find them in the `./lib` directory.
+**[Raccoon](https://github.com/hiwelo/raccoon/)** is an OOP-based WordPress template.
+All **[Raccoon](https://github.com/hiwelo/raccoon/)**'s classes are placed within the namespace `Hwlo\Raccoon\` and you can find them in the `./lib` directory.
 
 Any custom class that you can create should be placed in a specific namespace.
 For example, you can use a namespace like `Hwlo\Raccoon\Custom\`.
@@ -84,12 +84,12 @@ I strongly advice to use a PSR-4 namespace.
 For example, if you want to register a custom namespace like `Hwlo\Raccoon\Custom\`, you have to write custom classes in `./custom-lib/` and update `composer.json` like that:
 ```json
 {
-   "autoload": {
-      "psr-4": {
-         "Hwlo\\Raccoon\\": "./lib/",
-         "Hwlo\\Raccoon\\Custom\\": "./custom-lib/"
-      }
-   }
+  "autoload": {
+    "psr-4": {
+      "Hwlo\\Raccoon\\": "./lib/",
+      "Hwlo\\Raccoon\\Custom\\": "./custom-lib/"
+    }
+  }
 }
 ```
 
@@ -99,7 +99,20 @@ composer autoload
 ```
 
 
-## How a raccoon can help you with WordPress
+## How a raccoon can help you with _WordPress_
 
 ### A configuration manifest
-To avoid multiple initialization functions, Raccoon uses a JSON configuration file: `manifest.json`.
+To avoid multiple initialization functions, **[Raccoon](https://github.com/hiwelo/raccoon/)** uses a _JSON_ configuration file: `manifest.json`.
+In this file you can set all features proposed by _WordPress_ to its themes.
+
+### WordPress theme namespace
+With Raccoon, you can define a specific namespace for this theme.
+This namespace will be mainly used by string translation methods like `__()` or `_e()` or `_x()` or `_n()`.
+
+To define a specific namespace, you have to update `manifest.json` like that:
+```json
+{
+  "namespace": "raccoon"
+}
+```
+If empty or undefined, the default namespace will be `raccoon`.
