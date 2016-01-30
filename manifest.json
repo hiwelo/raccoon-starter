@@ -18,6 +18,10 @@
       "search-form"
     ]
   },
+  "theme-features": {
+    "comments": false,
+    "widget": false
+  },
   "navigations": {
     "primary": "Main navigation",
     "social": "Social links"

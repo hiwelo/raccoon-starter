@@ -100,6 +100,7 @@ class Core
      * @uses   Core::_loadWidgets()
      * @uses   Core::_removeCommentsFeature()
      * @uses   Core::_removePostType()
+     * @uses   Core::_removeWidgetFeature()
      */
     public static function setup($file = 'manifest.json')
     {
@@ -128,6 +129,8 @@ class Core
         self::_removePostType();
         // remove comments feature completely from WordPress
         self::_removeCommentsFeature();
+        // remove widgets feature completely from WordPress
+        self::_removeWidgetFeature();
 
         // if we're in admin dashboard,
         // add an action to remove elements from admin menu bar, meta boxes or
@@ -580,6 +583,33 @@ class Core
                     'options-discussion.php'
                 ];
             }
+        }
+    }
+
+    /**
+     * Unregister all widgets if asked in the manifest
+     *
+     * @return void
+     *
+     * @static
+     * @uses   Core::$manifest
+     * @uses   Core::stringToRealBooleans
+     */
+    private static function _removeWidgetFeature()
+    {
+        if (array_key_exists('theme-features', self::$manifest)
+            && array_key_exists('widget', self::$manifest['theme-features'])
+        ) {
+            $widgetFeature = self::$manifest['theme-features']['widget'];
+            Core::stringToRealBooleans($widgetFeature);
+
+            // @TODO unregister all declared widgets
+
+            // remove widget admin menu item
+            self::$adminSubMenuItemsToRemove[] = [
+                'themes.php',
+                'widgets.php'
+            ];
         }
     }
 }
