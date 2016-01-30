@@ -19,10 +19,15 @@
     - [Configuration manifest](#configuration-manifest)
     - [_WordPress_ theme namespace](#wordpress-theme-namespace)
     - [Theme supports](#theme-support)
+    - [Theme features](#theme-features)
     - [Navigations](#navigations)
-    - [Custom Post Types](#custom-post-types)
+    - [Post Types](#post-types)
+      - [Create a custom post type](#create-a-custom-post-type)
+      - [Post type unregistration](#post-type-unregistration)
     - [Sidebars](#sidebars)
     - [Widgets](#widgets)
+  - [Third part features](#third-part-features)
+    - [Raccoon loves Bedrock](#raccoon-loves-bedrock)
 
 
 ## Requirements
@@ -174,6 +179,18 @@ Here is the kind of statements that you can set up in the `manifest.json` file:
 }
 ```
 
+### Theme features
+**[Raccoon](https://github.com/hiwelo/raccoon)** has a feature which allows you to disable some Wordpress features like widgets or comments.
+In the `manifest.json` file you can easily (de-)activate these features with:
+```json
+{
+  "theme-features": {
+    "comments": false,
+    "widget": false
+  }
+}
+```
+
 ### Navigations
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up navigations with the `manifest.json` file.
 
@@ -241,7 +258,7 @@ For example if you want to register the same post type as the [_WordPress_ docum
 ```
 Good to know, you can't declare in `manifest.json` a custom post type named _remove_.
 
-#### Unregister an existing post type
+#### Post type unregistration
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can alse easily unregister an existing post type with the `manifest.json` file.
 
 Each existing post type, event _post_ or _pages_ can be unregister with this `manifest.json` functionality.
@@ -289,5 +306,20 @@ So, for a [widget registration](https://codex.wordpress.org/Function_Reference/r
   "widgets": [
     "Hwlo\\Raccoon\\WidgetExample"
   ]
+}
+```
+
+
+## Third-part features
+
+### Raccoon loves Bedrock
+_[Bedrock](https://roots.io/bedrock/)_ is a _WordPress_ boilerplate which create a better projet structure mainly with a new `wp-content/` folder renamed `app/`.
+_[Bedrock](https://roots.io/bedrock/)_ use Composer and environments variables.
+
+By example, **[Raccoon](https://github.com/hiwelo/raccoon/)** can use environments variables from Bedrocks to know the environment status (development, production, staging) and manage which debug informations has to be returned by the theme.
+If you don't use _[Bedrock](https://roots.io/bedrock/)_, you can manually set environment status in the `manifest.json` file like this :
+```json
+{
+  "environment-status": "development"
 }
 ```
