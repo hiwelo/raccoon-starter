@@ -48,7 +48,7 @@ class Core
      * @var    string
      * @static
      */
-    public static $env_status;
+    public static $env_status = "production";
 
     /**
      * Register all admin menu item to remove
@@ -107,14 +107,11 @@ class Core
      *
      * @link   https://codex.wordpress.org/Function_Reference/add_action
      * @link   https://codex.wordpress.org/Function_Reference/is_admin
-     * @link   https://codex.wordpress.org/Function_Reference/locate_template
      * @static
      * @uses   Core::$adminMenuItemsToRemove
      * @uses   Core::$adminSubMenuItemsToRemove
      * @uses   Core::$env_status
-     * @uses   Core::$manifest
      * @uses   Core::$metaBoxToRemove
-     * @uses   Core::$namespace
      * @uses   Core::$postTypeSupportToRemove
      * @uses   Core::$sidebarsToRemove
      * @uses   Core::$widgetsToRemove
@@ -132,15 +129,11 @@ class Core
     public static function setup($file = 'manifest.json')
     {
         // load theme manifest and store it as a static var
-        $file = locate_template($file);
-        $file = file_get_contents($file);
-        self::$manifest = json_decode($file, true);
+        self::_loadManifest($file);
         // load environment status
-        self::$env_status = $_ENV['WP_ENV'];
+        self::_loadEnvironmentStatus();
         // load theme namespace, used mainly for translation methods
-        if (!empty(self::$manifest['namespace'])) {
-            self::$namespace = self::$manifest['namespace'];
-        }
+        self::_loadNamespace();
         // load if necessary all debug methods
         self::_loadDebug();
         // make this theme available for translation
@@ -337,6 +330,65 @@ class Core
         }
 
         return $value;
+    }
+
+    /**
+     * Load manifest content and store it in this object
+     *
+     * @param string $file manifest location
+     *
+     * @return void
+     *
+     * @link   https://codex.wordpress.org/Function_Reference/locate_template
+     * @static
+     * @uses   Core::$manifest
+     */
+    private static function _loadManifest($file)
+    {
+        $file = locate_template($file);
+        $file = file_get_contents($file);
+        self::$manifest = json_decode($file, true);
+    }
+
+    /**
+     * Search environment status if available:
+     *   1. first in $_ENV
+     *   2. if non available, in manifest.json (environment-status and env-status)
+     *   3. if non available, environment status is set at `production`
+     *
+     * @global array $_ENV Environment variables
+     *
+     * @return void
+     *
+     * @static
+     * @uses   Core::$env_status
+     * @uses   Core::$manifest
+     */
+    private static function _loadEnvironmentStatus()
+    {
+        if (array_key_exists('WP_ENV', $_ENV)) {
+            self::$env_status = $_ENV['WP_ENV'];
+        } elseif (array_key_exists('environment-status', self::$manifest)) {
+            self::$env_status = self::$manifest['environment-status'];
+        } elseif (array_key_exists('env-status', self::$manifest)) {
+            self::$env_status = self::$manifest['env-status'];
+        }
+    }
+
+    /**
+     * Load theme namespace information from the manifest
+     *
+     * @return void
+     *
+     * @static
+     * @uses   Core::$manifest
+     * @uses   Core::$namespace
+     */
+    private static function _loadNamespace()
+    {
+        if (!empty(self::$manifest['namespace'])) {
+            self::$namespace = self::$manifest['namespace'];
+        }
     }
 
     /**
