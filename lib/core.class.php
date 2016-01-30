@@ -33,6 +33,7 @@ class Core
      * @static
      */
     public static $namespace = '';
+
     /**
      * Manifest informations for this theme
      *
@@ -40,6 +41,7 @@ class Core
      * @static
      */
     public static $manifest;
+
     /**
      * Environment status (development, staging, production)
      *
@@ -81,16 +83,41 @@ class Core
     public static $postTypeSupportToRemove = [];
 
     /**
+     * Register all widgets to remove
+     *
+     * @var    array
+     * @static
+     */
+    public static $widgetsToRemove = [];
+
+    /**
+     * Register all sidebars to remove
+     *
+     * @var    array
+     * @static
+     */
+    public static $sidebarsToRemove = [];
+
+    /**
      * Setup this theme from a json configuration file
      *
      * @param string $file path to the json configuration file
      *
      * @return void
      *
+     * @link   https://codex.wordpress.org/Function_Reference/add_action
+     * @link   https://codex.wordpress.org/Function_Reference/is_admin
+     * @link   https://codex.wordpress.org/Function_Reference/locate_template
      * @static
+     * @uses   Core::$adminMenuItemsToRemove
+     * @uses   Core::$adminSubMenuItemsToRemove
      * @uses   Core::$env_status
      * @uses   Core::$manifest
+     * @uses   Core::$metaBoxToRemove
      * @uses   Core::$namespace
+     * @uses   Core::$postTypeSupportToRemove
+     * @uses   Core::$sidebarsToRemove
+     * @uses   Core::$widgetsToRemove
      * @uses   Core::_i18nReady()
      * @uses   Core::_loadCustomPostTypes()
      * @uses   Core::_loadDebug()
@@ -131,6 +158,14 @@ class Core
         self::_removeCommentsFeature();
         // remove widgets feature completely from WordPress
         self::_removeWidgetFeature();
+
+        // add remove actions
+        if (count(self::$widgetsToRemove)) {
+            add_action('widgets_init', [__CLASS__, 'removeWidgets'], 11);
+        }
+        if (count(self::$sidebarsToRemove)) {
+            add_action('widgets_init', [__CLASS__, 'removeSidebars'], 11);
+        }
 
         // if we're in admin dashboard,
         // add an action to remove elements from admin menu bar, meta boxes or
@@ -233,6 +268,50 @@ class Core
 
             foreach ($items as $item) {
                 remove_post_type_support($item[0], $item[1]);
+            }
+        }
+    }
+
+    /**
+     * Remove all widgets from the $widgetsToRemove property
+     *
+     * @return void
+     *
+     * @link https://codex.wordpress.org/Function_Reference/unregister_widget
+     *
+     * @static
+     * @uses   Core::$widgetsToRemove
+     */
+    public static function removeWidgets()
+    {
+        if (count(self::$widgetsToRemove)) {
+            // get all widgets to remove
+            $items = self::$widgetsToRemove;
+
+            foreach ($items as $item) {
+                unregister_widget($item);
+            }
+        }
+    }
+
+    /**
+     * Remove all sidebars from the $widgetsToRemove property
+     *
+     * @return void
+     *
+     * @link https://codex.wordpress.org/Function_Reference/unregister_sidebar
+     *
+     * @static
+     * @uses   Core::$sidebarsToRemove
+     */
+    public static function removeSidebars()
+    {
+        if (count(self::$sidebarsToRemove)) {
+            // get all sidebars to remove
+            $items = self::$sidebarsToRemove;
+
+            foreach ($items as $item) {
+                unregister_sidebar($item);
             }
         }
     }
@@ -589,11 +668,17 @@ class Core
     /**
      * Unregister all widgets if asked in the manifest
      *
+     * @global array $wp_registered_sidebars List all sidebars
+     * @global array $wp_widget_factory      List all widgets
+     *
      * @return void
      *
      * @static
+     * @uses   Core::$adminSubMenuItemsToRemove
      * @uses   Core::$manifest
-     * @uses   Core::stringToRealBooleans
+     * @uses   Core::$sidebarsToRemove
+     * @uses   Core::$widgetsToRemove
+     * @uses   Core::stringToRealBooleans()
      */
     private static function _removeWidgetFeature()
     {
@@ -601,9 +686,42 @@ class Core
             && array_key_exists('widget', self::$manifest['theme-features'])
         ) {
             $widgetFeature = self::$manifest['theme-features']['widget'];
-            Core::stringToRealBooleans($widgetFeature);
+            self::stringToRealBooleans($widgetFeature);
 
-            // @TODO unregister all declared widgets
+            // remove defaults widget
+            $defaultWidgets = [
+                'WP_Widget_Pages',
+                'WP_Widget_Archives',
+                'WP_Widget_Meta',
+                'WP_Widget_Text',
+                'WP_Widget_Recent_Posts',
+                'WP_Widget_Recent_Comments',
+                'WP_Widget_Calendar',
+                'WP_Widget_Links',
+                'WP_Widget_Search',
+                'WP_Widget_Categories',
+                'WP_Widget_RSS',
+                'WP_Widget_Tag_Cloud',
+                'WP_Nav_Menu_Widget',
+                'Twenty_Eleven_Ephemera_Widget',
+            ];
+            foreach ($defaultWidgets as $widget) {
+                self::$widgetsToRemove[] = $widget;
+            }
+
+            // list all custom widgets for unregistration
+            global $wp_widget_factory;
+            $widgets = $wp_widget_factory->widgets;
+            foreach ($widgets as $id => $widget) {
+                self::$widgetsToRemove[] = $id;
+            }
+
+            // list all sidebars for unregistration
+            global $wp_registered_sidebars;
+            $sidebars = $wp_registered_sidebars;
+            foreach ($sidebars as $id => $sidebar) {
+                self::$sidebarsToRemove[] = $id;
+            }
 
             // remove widget admin menu item
             self::$adminSubMenuItemsToRemove[] = [
