@@ -189,7 +189,9 @@ For example if you want to register two navigations (a primary navigation and a 
 }
 ```
 
-### Custom Post Types
+### Post Types
+
+#### Create a custom post type
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up custom post types with the `manifest.json` file.
 
 Each custom post type must have a title and an array of arguments. All arguments described in the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_post_type) can be used in the `manifest.json` file.
@@ -197,7 +199,7 @@ Each custom post type must have a title and an array of arguments. All arguments
 For example if you want to register the same post type as the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_post_type#_edit_link), you have to update `manifest.json` like that:
 ```json
 {
-  "custom-post-types": {
+  "post-types": {
     "books": {
       "labels": {
         "name": "Books",
@@ -237,6 +239,22 @@ For example if you want to register the same post type as the [_WordPress_ docum
   }
 }
 ```
+Good to know, you can't declare in `manifest.json` a custom post type named _remove_.
+
+#### Unregister an existing post type
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can alse easily unregister an existing post type with the `manifest.json` file.
+
+Each existing post type, event _post_ or _pages_ can be unregister with this `manifest.json` functionality.
+You just have to add in your `manifest.json`:
+```json
+{
+  "post-types": {
+    "remove": ["post"]
+  }
+}
+```
+
+For example if you want to register the same post type as the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_post_type#_edit_link), you have to update `manifest.json` like that:
 
 ### Sidebars
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up sidebars with the `manifest.json` file.

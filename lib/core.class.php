@@ -441,8 +441,8 @@ class Core
      */
     private static function _loadCustomPostTypes()
     {
-        if (array_key_exists('custom-post-types', self::$manifest)) {
-            $customPostTypes = self::$manifest['custom-post-types'];
+        if (array_key_exists('post-types', self::$manifest)) {
+            $customPostTypes = self::$manifest['post-types'];
 
             // if exists, remove post type asked to unregistration
             if (array_key_exists('remove', $customPostTypes)) {
@@ -565,8 +565,8 @@ class Core
         // get all register post types
         global $wp_post_types;
 
-        if (array_key_exists('remove', self::$manifest['custom-post-types'])) {
-            $postTypesToRemove = self::$manifest['custom-post-types']['remove'];
+        if (array_key_exists('remove', self::$manifest['post-types'])) {
+            $postTypesToRemove = self::$manifest['post-types']['remove'];
 
             foreach ($postTypesToRemove as $postType) {
                 // get post type name to remove from admin menu bar

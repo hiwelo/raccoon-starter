@@ -26,7 +26,8 @@
     "primary": "Main navigation",
     "social": "Social links"
   },
-  "custom-post-types": {
+  "post-types": {
+    "remove": ["post"],
     "books": {
       "labels": {
         "name": "Books",
