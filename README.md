@@ -130,6 +130,8 @@ Some errors on PHP files can be automatically fixed by `phpcbf`. To do so, run:
 composer phpcbf
 ```
 
+So don't forget: to make **[Raccoon](https://github.com/hiwelo/raccoon/)** happy, document your _f**king code! :D
+
 
 ## How a raccoon can help you with _WordPress_
 
