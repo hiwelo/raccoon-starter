@@ -33,7 +33,7 @@ class Core
      * @var    string
      * @static
      */
-    public static $namespace = '';
+    public static $namespace = 'raccoon';
 
     /**
      * Manifest informations for this theme
@@ -69,9 +69,14 @@ class Core
 
     /**
      * Register all meta box to remove
+     * Each metabox to remove must be an array of three elements:
+     *   1. metabox ID
+     *   2. type of screen to remove the metabox from
+     *   3. context of removal
      *
-     * @var    array
+     * @link   https://codex.wordpress.org/Function_Reference/remove_meta_box
      * @static
+     * @var    array
      */
     public static $metaBoxToRemove = [];
 
@@ -100,6 +105,20 @@ class Core
     public static $sidebarsToRemove = [];
 
     /**
+     * Register all contact methods to add
+     * @var    array
+     * @static
+     */
+    public static $contactMethodsToAdd = [];
+
+    /**
+     * Register all contact methods to remove
+     * @var    array
+     * @static
+     */
+    public static $contactMethodsToRemove = [];
+
+    /**
      * Setup this theme from a json configuration file
      *
      * @param string $file path to the json configuration file
@@ -111,12 +130,17 @@ class Core
      * @static
      * @uses   Core::$adminMenuItemsToRemove
      * @uses   Core::$adminSubMenuItemsToRemove
+     * @uses   Core::$contactMethodsToAdd
+     * @uses   Core::$contactMethodsToRemove
      * @uses   Core::$env_status
+     * @uses   Core::$manifest
      * @uses   Core::$metaBoxToRemove
      * @uses   Core::$postTypeSupportToRemove
      * @uses   Core::$sidebarsToRemove
      * @uses   Core::$widgetsToRemove
      * @uses   Core::i18nReady()
+     * @uses   Core::loadCleanUp()
+     * @uses   Core::loadContactMethods()
      * @uses   Core::loadCustomPostTypes()
      * @uses   Core::loadDebug()
      * @uses   Core::loadNavigations()
@@ -126,6 +150,7 @@ class Core
      * @uses   Core::removeCommentsFeature()
      * @uses   Core::removePostType()
      * @uses   Core::removeWidgetFeature()
+     * @uses   Core::updateContactMethods()
      */
     public static function setup($file = 'manifest.json')
     {
@@ -152,6 +177,10 @@ class Core
         self::removeCommentsFeature();
         // remove widgets feature completely from WordPress
         self::removeWidgetFeature();
+        // update contact methods like described in the manifest
+        self::loadContactMethods();
+        // if a WP mess cleanup is asked, we load the specific class
+        self::loadCleanUp();
 
         // add remove actions
         if (count(self::$widgetsToRemove)) {
@@ -177,6 +206,13 @@ class Core
             if (count(self::$postTypeSupportToRemove)) {
                 add_action('admin_init', [__CLASS__, 'removePostTypeSupport']);
             }
+        }
+
+        // add some filters
+        if (count(self::$contactMethodsToAdd)
+            || count(self::$contactMethodsToRemove)
+        ) {
+            add_filter('user_contactmethods', [__CLASS__, 'updateContactMethods']);
         }
     }
 
@@ -331,6 +367,34 @@ class Core
         }
 
         return $value;
+    }
+
+    /**
+     * Update contact methods in the user profil
+     *
+     * @param  array $contactMethods Existing contact methods
+     *
+     * @return array New contact methods
+     *
+     * @static
+     * @uses   Core::$contactMethodsToAdd
+     * @uses   Core::$contactMethodsToRemove
+     */
+    public static function updateContactMethods($contactMethods)
+    {
+        if (count(self::$contactMethodsToRemove)) {
+            foreach (self::$contactMethodsToRemove as $method) {
+                unset($contactMethods[$method]);
+            }
+        }
+
+        if (count(self::$contactMethodsToAdd)) {
+            foreach (self::$contactMethodsToAdd as $id => $method) {
+                $contactMethods[$id] = $method;
+            }
+        }
+
+        return $contactMethods;
     }
 
     /**
@@ -602,6 +666,23 @@ class Core
     }
 
     /**
+     * Load WordPress mess cleanup class if asked in the manifest
+     *
+     * @return void
+     *
+     * @uses   Alsacreations\ModernWeb\CleanUp
+     * @uses   Core::$manifest
+     */
+    private static function loadCleanUp()
+    {
+        if (array_key_exists('theme-features', self::$manifest)
+            && array_key_exists('cleanup', self::$manifest['theme-features'])
+        ) {
+            $cleanup = new CleanUp(self::$manifest['theme-features']['cleanup']);
+        }
+    }
+
+    /**
      * Unregister asked post types from the manifest
      *
      * @global array $wp_post_types List of post types
@@ -783,6 +864,28 @@ class Core
                 'themes.php',
                 'widgets.php'
             ];
+        }
+    }
+
+    private static function loadContactMethods()
+    {
+        if (array_key_exists('contact-methods', self::$manifest)) {
+            if (array_key_exists('remove', self::$manifest['contact-methods'])) {
+                $methodsToRemove = self::$manifest['contact-methods']['remove'];
+                $methodsToAdd = self::$manifest['contact-methods'];
+                unset($methodsToAdd['remove']);
+            } else {
+                $methodsToAdd = self::$manifest['contact-methods'];
+                $methodsToRemove = [];
+            }
+
+            if (count($methodsToAdd)) {
+                self::$contactMethodsToAdd = $methodsToAdd;
+            }
+
+            if (count($methodsToRemove)) {
+                self::$contactMethodsToRemove = $methodsToRemove;
+            }
         }
     }
 }
