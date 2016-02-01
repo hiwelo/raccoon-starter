@@ -867,6 +867,15 @@ class Core
         }
     }
 
+    /**
+     * Load custom contact methods list from the manifest
+     *
+     * @return void
+     *
+     * @uses Core::$contactMethodsToAdd
+     * @uses Core::$contactMethodsToRemove
+     * @uses Core::$manifest
+     */
     private static function loadContactMethods()
     {
         if (array_key_exists('contact-methods', self::$manifest)) {

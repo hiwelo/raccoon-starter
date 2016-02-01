@@ -87,7 +87,6 @@ class CleanUp
             $this->cleanUp = array_merge($this->default, $configuration);
         } else {
             Core::stringToRealBooleans($configuration);
-            var_dump($configuration); exit;
             if ($configuration) {
                 $this->cleanUp = $this->default;
             }
@@ -132,6 +131,11 @@ class CleanUp
         }
     }
 
+    /**
+     * Clean up WordPress wp_head mess for more security
+     *
+     * @return void
+     */
     public function securityCleanUp()
     {
         if (is_array($this->cleanUp['security'])) {
