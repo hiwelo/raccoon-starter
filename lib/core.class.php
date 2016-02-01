@@ -11,6 +11,7 @@
  * @link     ./docs/api/classes/Hwlo.Raccoon.Core.html
  */
 namespace Hwlo\Raccoon;
+
 use Symfony\Component\Debug\Debug;
 
 /**
@@ -115,42 +116,42 @@ class Core
      * @uses   Core::$postTypeSupportToRemove
      * @uses   Core::$sidebarsToRemove
      * @uses   Core::$widgetsToRemove
-     * @uses   Core::_i18nReady()
-     * @uses   Core::_loadCustomPostTypes()
-     * @uses   Core::_loadDebug()
-     * @uses   Core::_loadNavigations()
-     * @uses   Core::_loadSidebars()
-     * @uses   Core::_loadThemeSupport()
-     * @uses   Core::_loadWidgets()
-     * @uses   Core::_removeCommentsFeature()
-     * @uses   Core::_removePostType()
-     * @uses   Core::_removeWidgetFeature()
+     * @uses   Core::i18nReady()
+     * @uses   Core::loadCustomPostTypes()
+     * @uses   Core::loadDebug()
+     * @uses   Core::loadNavigations()
+     * @uses   Core::loadSidebars()
+     * @uses   Core::loadThemeSupport()
+     * @uses   Core::loadWidgets()
+     * @uses   Core::removeCommentsFeature()
+     * @uses   Core::removePostType()
+     * @uses   Core::removeWidgetFeature()
      */
     public static function setup($file = 'manifest.json')
     {
         // load theme manifest and store it as a static var
-        self::_loadManifest($file);
+        self::loadManifest($file);
         // load environment status
-        self::_loadEnvironmentStatus();
+        self::loadEnvironmentStatus();
         // load theme namespace, used mainly for translation methods
-        self::_loadNamespace();
+        self::loadNamespace();
         // load if necessary all debug methods
-        self::_loadDebug();
+        self::loadDebug();
         // make this theme available for translation
-        self::_i18nReady();
+        self::i18nReady();
         // enable theme features asked in the manifest
-        self::_loadThemeSupport();
+        self::loadThemeSupport();
         // register navigations, custom post types, sidebars and widgets
-        self::_loadNavigations();
-        self::_loadCustomPostTypes();
-        self::_loadSidebars();
-        self::_loadWidgets();
+        self::loadNavigations();
+        self::loadCustomPostTypes();
+        self::loadSidebars();
+        self::loadWidgets();
         // unregister asked post types
-        self::_removePostType();
+        self::removePostType();
         // remove comments feature completely from WordPress
-        self::_removeCommentsFeature();
+        self::removeCommentsFeature();
         // remove widgets feature completely from WordPress
-        self::_removeWidgetFeature();
+        self::removeWidgetFeature();
 
         // add remove actions
         if (count(self::$widgetsToRemove)) {
@@ -321,12 +322,12 @@ class Core
     public static function stringToRealBooleans(&$value)
     {
         switch ($value) {
-        case "true":
-            $value = true;
-            break;
-        case "false":
-            $value = false;
-            break;
+            case "true":
+                $value = true;
+                break;
+            case "false":
+                $value = false;
+                break;
         }
 
         return $value;
@@ -343,7 +344,7 @@ class Core
      * @static
      * @uses   Core::$manifest
      */
-    private static function _loadManifest($file)
+    private static function loadManifest($file)
     {
         $file = locate_template($file);
         $file = file_get_contents($file);
@@ -364,7 +365,7 @@ class Core
      * @uses   Core::$env_status
      * @uses   Core::$manifest
      */
-    private static function _loadEnvironmentStatus()
+    private static function loadEnvironmentStatus()
     {
         if (array_key_exists('WP_ENV', $_ENV)) {
             self::$env_status = $_ENV['WP_ENV'];
@@ -384,7 +385,7 @@ class Core
      * @uses   Core::$manifest
      * @uses   Core::$namespace
      */
-    private static function _loadNamespace()
+    private static function loadNamespace()
     {
         if (!empty(self::$manifest['namespace'])) {
             self::$namespace = self::$manifest['namespace'];
@@ -400,7 +401,7 @@ class Core
      * @uses   Core::$env_status
      * @uses   \Symfony\Component\Debug\Debug::enable()
      */
-    private static function _loadDebug()
+    private static function loadDebug()
     {
         // only if we're in development, we run all scripts
         if (self::$env_status === 'development') {
@@ -418,7 +419,7 @@ class Core
      * @static
      * @uses   Core::$namespace
      */
-    private static function _i18nReady()
+    private static function i18nReady()
     {
         load_theme_textdomain(
             self::$namespace,
@@ -435,7 +436,7 @@ class Core
      * @static
      * @uses   Core::$manifest
      */
-    private static function _loadThemeSupport()
+    private static function loadThemeSupport()
     {
         if (array_key_exists('theme-support', self::$manifest)) {
             $supports = self::$manifest['theme-support'];
@@ -445,17 +446,17 @@ class Core
                     $value = boolval($value);
                 }
                 switch (gettype($value)) {
-                case "boolean":
-                    if ($value === true) {
-                        add_theme_support($key);
-                    }
-                    break;
-                case "array":
-                    add_theme_support($key, $value);
-                    break;
-                case "string":
-                    add_theme_support($key, $value);
-                    break;
+                    case "boolean":
+                        if ($value === true) {
+                            add_theme_support($key);
+                        }
+                        break;
+                    case "array":
+                        add_theme_support($key, $value);
+                        break;
+                    case "string":
+                        add_theme_support($key, $value);
+                        break;
                 }
             }
         }
@@ -471,7 +472,7 @@ class Core
      * @uses   Core::$manifest
      * @uses   Core::$namespace
      */
-    private static function _loadNavigations()
+    private static function loadNavigations()
     {
         if (array_key_exists('navigations', self::$manifest)) {
             $navigations = self::$manifest['navigations'];
@@ -491,7 +492,7 @@ class Core
      * @uses   Core::$manifest
      * @uses   Core::$namespace
      */
-    private static function _loadCustomPostTypes()
+    private static function loadCustomPostTypes()
     {
         if (array_key_exists('post-types', self::$manifest)) {
             $customPostTypes = self::$manifest['post-types'];
@@ -563,7 +564,7 @@ class Core
      * @uses   Core::$manifest
      * @uses   Core::$namespace
      */
-    private static function _loadSidebars()
+    private static function loadSidebars()
     {
         if (array_key_exists('sidebars', self::$manifest)) {
             $sidebars = self::$manifest['sidebars'];
@@ -590,7 +591,7 @@ class Core
      * @static
      * @uses   Core::$manifest
      */
-    private static function _loadWidgets()
+    private static function loadWidgets()
     {
         if (array_key_exists('widgets', self::$manifest)) {
             $widgets = self::$manifest['widgets'];
@@ -612,7 +613,7 @@ class Core
      * @uses   Core::$adminMenuItemsToRemove
      * @uses   Core::$manifest
      */
-    private static function _removePostType()
+    private static function removePostType()
     {
         // get all register post types
         global $wp_post_types;
@@ -658,7 +659,7 @@ class Core
      * @uses   Core::$postTypeSupportToRemove
      * @uses   Core::stringToRealBooleans
      */
-    private static function _removeCommentsFeature()
+    private static function removeCommentsFeature()
     {
         // if this action is asked in the manifest
         if (array_key_exists('theme-features', self::$manifest)
@@ -732,7 +733,7 @@ class Core
      * @uses   Core::$widgetsToRemove
      * @uses   Core::stringToRealBooleans()
      */
-    private static function _removeWidgetFeature()
+    private static function removeWidgetFeature()
     {
         if (array_key_exists('theme-features', self::$manifest)
             && array_key_exists('widget', self::$manifest['theme-features'])
