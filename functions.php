@@ -10,7 +10,7 @@
  * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
  * @link     https://codex.wordpress.org/Functions_File_Explained
  */
-namespace Hwlo\Raccoon;
+use Hwlo\Raccoon\Core;
 
 /*
  * PSR-4 autoloading system

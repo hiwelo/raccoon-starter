@@ -86,7 +86,7 @@ class CleanUp
         if (is_array($configuration)) {
             $this->cleanUp = array_merge($this->default, $configuration);
         } else {
-            Core::stringToRealBooleans($configuration);
+            Tools::parseBooleans($configuration);
             if ($configuration) {
                 $this->cleanUp = $this->default;
             }
@@ -109,7 +109,7 @@ class CleanUp
                 $this->cleanUp['admin']
             );
         } else {
-            Core::stringToRealBooleans($this->cleanUp['admin']);
+            Tools::parseBooleans($this->cleanUp['admin']);
             if ($this->cleanUp['admin']) {
                 $this->cleanUp['admin'] = $this->default['admin'];
             }
@@ -144,7 +144,7 @@ class CleanUp
                 $this->cleanUp['security']
             );
         } else {
-            Core::stringToRealBooleans($this->cleanUp['security']);
+            Tools::parseBooleans($this->cleanUp['security']);
             if ($this->cleanUp['security']) {
                 $this->cleanUp['security'] = $this->default['security'];
             }

@@ -347,29 +347,6 @@ class Core
     }
 
     /**
-     * Return a "string boolean" to a real boolean var
-     *
-     * @param string|boolean $value string to parse into a real boolean
-     *
-     * @return boolean
-     *
-     * @static
-     */
-    public static function stringToRealBooleans(&$value)
-    {
-        switch ($value) {
-            case "true":
-                $value = true;
-                break;
-            case "false":
-                $value = false;
-                break;
-        }
-
-        return $value;
-    }
-
-    /**
      * Update contact methods in the user profil
      *
      * @param  array $contactMethods Existing contact methods
@@ -740,7 +717,7 @@ class Core
      * @uses   Core::$manifest
      * @uses   Core::$metaBoxToRemove
      * @uses   Core::$postTypeSupportToRemove
-     * @uses   Core::stringToRealBooleans
+     * @uses   Tools::parseBooleans
      */
     private static function removeCommentsFeature()
     {
@@ -749,7 +726,7 @@ class Core
             && array_key_exists('comments', self::$manifest['theme-features'])
         ) {
             $commentsFeature = self::$manifest['theme-features']['comments'];
-            Core::stringToRealBooleans($commentsFeature);
+            Tools::parseBooleans($commentsFeature);
 
             if ($commentsFeature === false) {
                 // count options to reset at 0
@@ -814,7 +791,7 @@ class Core
      * @uses   Core::$manifest
      * @uses   Core::$sidebarsToRemove
      * @uses   Core::$widgetsToRemove
-     * @uses   Core::stringToRealBooleans()
+     * @uses   Tools::parseBooleans()
      */
     private static function removeWidgetFeature()
     {
@@ -822,7 +799,7 @@ class Core
             && array_key_exists('widget', self::$manifest['theme-features'])
         ) {
             $widgetFeature = self::$manifest['theme-features']['widget'];
-            self::stringToRealBooleans($widgetFeature);
+            Tools::parseBooleans($widgetFeature);
 
             // remove defaults widget
             $defaultWidgets = [

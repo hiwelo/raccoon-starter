@@ -10,13 +10,14 @@
  * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
  * @link     https://codex.wordpress.org/Template_Hierarchy
  */
-?>
-<!DOCTYPE html>
+
+use \Hwlo\Raccoon\Tools;
+
+?><!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
     <?php wp_head(); ?>
@@ -39,7 +40,7 @@
                     </p><!-- .banner__title -->
                 <?php } ?>
             </div><!-- .banner__branding -->
-            <?php $navigations->menu('primary'); ?>
+            <?php /*$navigations->menu('primary');*/ ?>
         </header><!-- .banner -->
 
         <main class="content">
