@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<ruleset name="Hiwelo">
-  <description>Hiwelo Coding Standards</description>
+<ruleset name="Raccoon">
+  <description>Raccoon Coding Standards</description>
 
   <!-- Use PSR-2 as a base -->
-  <rule ref="PSR2">
-    <!-- Allow multiple PHP statements in the same line (usually in template files) -->
-    <exclude name="Generic.Formatting.DisallowMultipleStatements.SameLine"/>
-    <exclude name="Generic.NamingConventions.CamelCapsFunctionName" />
-    <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps" />
-  </rule>
-
-  <!-- Verify that operators have valid spacing surrounding them -->
-  <rule ref="Squiz.WhiteSpace.OperatorSpacing"></rule>
+  <rule ref="PSR2" />
+  <!-- there may not be any 'TODO' tor 'FIXME' comments -->
+  <rule ref="Generic.Commenting.Todo" />
+  <rule ref="Generic.Commenting.Fixme" />
+  <!-- there may be comments in your code -->
+  <rule ref="PEAR.Commenting.ClassComment" />
+  <rule ref="PEAR.Commenting.FileComment" />
+  <rule ref="PEAR.Commenting.FunctionComment" />
+  <rule ref="PEAR.Commenting.InlineComment" />
 </ruleset>

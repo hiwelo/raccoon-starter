@@ -56,10 +56,10 @@
         "composer dump-autoload --optimize"
       ],
       "test": [
-        "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --ignore=vendor/,docs/,node_modules/ .",
+        "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ .",
         "jshint --reporter=node_modules/jshint-stylish --exclude-path=.gitignore ."
       ],
-      "phpcbf": ["./vendor/squizlabs/php_codesniffer/scripts/phpcbf --extensions=php --ignore=vendor/,docs/,node_modules/ ."],
+      "phpcbf": ["./vendor/squizlabs/php_codesniffer/scripts/phpcbf --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ ."],
       "documentation": [
         "./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d . -t ./docs/api/ --ignore=vendor/,docs/,node_modules/"
       ],
