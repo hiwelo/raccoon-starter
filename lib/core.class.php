@@ -618,7 +618,9 @@ class Core
         // get all register post types
         global $wp_post_types;
 
-        if (array_key_exists('remove', self::$manifest['post-types'])) {
+        if (array_key_exists('post-types', self::$manifest['post-types'])
+            && array_key_exists('remove', self::$manifest['post-types'])
+        ) {
             $postTypesToRemove = self::$manifest['post-types']['remove'];
 
             foreach ($postTypesToRemove as $postType) {
