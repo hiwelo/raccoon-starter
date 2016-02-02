@@ -14,7 +14,7 @@
     - [Documentation](#documentation)
   - [How to code with a raccoon](#how-to-code-with-a-raccoon)
     - [OOP PHP Class](#oop-php-class)
-    - [Raccoon loves PEAR Coding Standards](#raccoon-loves-pear-coding-standards)
+    - [Raccoon loves PSR-2 Coding Standards and documentation](#raccoon-loves-psr-2-coding-standards-and-documentation)
   - [How a raccoon can help you with _WordPress_](#how-a-raccoon-can-help-you-with-wordpress)
     - [Configuration manifest](#configuration-manifest)
     - [_WordPress_ theme namespace](#wordpress-theme-namespace)
