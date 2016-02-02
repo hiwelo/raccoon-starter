@@ -27,7 +27,6 @@
     "social": "Social links"
   },
   "post-types": {
-    "remove": ["post"],
     "books": {
       "labels": {
         "name": "Books",
@@ -62,6 +61,18 @@
         "custom-fields",
         "revisions",
         "post-formats"
+      ]
+    }
+  },
+  "post-status": {
+    "archive": {
+      "label": "Archive",
+      "public": true,
+      "show_in_admin_all_list": false,
+      "show_in_admin_status_list": true,
+      "label_count": [
+        "Archive <span class=\"count\">(%s)</span>",
+        "Archives <span class=\"count\">(%s)</span>"
       ]
     }
   },

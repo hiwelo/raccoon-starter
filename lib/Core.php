@@ -144,6 +144,7 @@ class Core
      * @uses   Core::loadCustomPostTypes()
      * @uses   Core::loadDebug()
      * @uses   Core::loadNavigations()
+     * @uses   Core::loadPostStatus()
      * @uses   Core::loadSidebars()
      * @uses   Core::loadThemeSupport()
      * @uses   Core::loadWidgets()
@@ -169,6 +170,7 @@ class Core
         // register navigations, custom post types, sidebars and widgets
         self::loadNavigations();
         self::loadCustomPostTypes();
+        self::loadPostStatus();
         self::loadSidebars();
         self::loadWidgets();
         // unregister asked post types
@@ -375,6 +377,125 @@ class Core
     }
 
     /**
+     * Add custom post status to quick edit select box
+     *
+     * @return void;
+     *
+     * @static
+     * @uses   Core::$manifest
+     * @uses   Core::$namespace
+     */
+    public static function addCustomPostStatusToQuickEdit()
+    {
+        if (array_key_exists('post-status', self::$manifest)) {
+            $postStatus = self::$manifest['post-status'];
+
+            if (array_key_exists('remove', $postStatus)) {
+                unset($postStatus['remove']);
+            }
+
+            foreach ($postStatus as $status => $args) {
+                echo "
+                    <script>
+                        jQuery(document).ready(function () {
+                            jQuery('select[name=\"_status\"]').append('<option value=\"" .
+                            $status .
+                            "\">" .
+                            __($args['label'], self::$namespace) .
+                            "</option>');
+                        });
+                    </script>
+                ";
+            }
+        }
+    }
+
+    /**
+     * Add custom post status to edit page select box
+     *
+     * @return void;
+     *
+     * @static
+     * @uses   Core::$manifest
+     * @uses   Core::$namespace
+     */
+    public static function addCustomPostStatusToEdit()
+    {
+        if (array_key_exists('post-status', self::$manifest)) {
+            $postStatus = self::$manifest['post-status'];
+
+            if (array_key_exists('remove', $postStatus)) {
+                unset($postStatus['remove']);
+            }
+
+            global $post;
+
+            foreach ($postStatus as $status => $args) {
+                $complete = '';
+                $label = '';
+
+                if ($post->post_status === $status) {
+                    $complete = ' selected="selected"';
+                    $label = '<span id="post-status-display"> ' . __($args['label'], self::$namespace) . '</span>';
+                }
+
+                echo "
+                    <script>
+                        jQuery(document).ready(function () {
+                            jQuery('select#post_status').append('<option value=\"" .
+                            $status .
+                            "\" " .
+                            $complete .
+                            ">" .
+                            __($args['label'], self::$namespace) .
+                            "</option>');
+                            jQuery('.misc-pub-section label').append('" . $label . "');
+                        });
+                    </script>
+                ";
+            }
+        }
+    }
+
+    /**
+     * Add status label to a post in the admin panel list if this status is in
+     * the custom status list
+     *
+     * @global object $post Post object with all informations
+     *
+     * @param  array $statuses List of all statuses
+     *
+     * @return array
+     *
+     * @link   https://codex.wordpress.org/Function_Reference/get_query_var
+     * @static
+     * @uses   Core::$manifest
+     * @uses   Core::$namespace
+     */
+    public static function displayStatusLabelToPost($statuses)
+    {
+        if (array_key_exists('post-status', self::$manifest)) {
+            $postStatus = self::$manifest['post-status'];
+
+            if (array_key_exists('remove', $postStatus)) {
+                unset($postStatus['remove']);
+            }
+
+            global $post;
+
+            foreach ($postStatus as $status => $args) {
+                if (get_query_var('post_status') !== $status) {
+                    if ($post->post_status === $status) {
+                        return array(__($args['label'], self::$namespace));
+                    }
+                }
+            }
+        }
+
+        return $statuses;
+    }
+
+    /**
      * Load manifest content and store it in this object
      *
      * @param string $file manifest location
@@ -519,6 +640,54 @@ class Core
             $navigations = self::$manifest['navigations'];
             foreach ($navigations as $location => $description) {
                 register_nav_menu($location, __($description, self::$namespace));
+            }
+        }
+    }
+
+    /**
+     * Register custom post status
+     *
+     * @return void
+     *
+     * @link   https://codex.wordpress.org/Function_Reference/_n_noop
+     * @link   https://codex.wordpress.org/Function_Reference/_x
+     * @link   https://codex.wordpress.org/Function_Reference/register_post_status
+     * @static
+     * @uses   Core::$manifest
+     * @uses   Core::$namespace
+     */
+    private static function loadPostStatus()
+    {
+        if (array_key_exists('post-status', self::$manifest)) {
+            $customPostStatus = self::$manifest['post-status'];
+
+            // if exists, remove post status asked to unregistration
+            if (array_key_exists('remove', $customPostStatus)) {
+                unset($customPostStatus['remove']);
+            }
+
+            foreach ($customPostStatus as $postStatus => $args) {
+                // parsing labels values
+                if (array_key_exists('label', $args)) {
+                    $args['label'] = _x($args['label'], 'post', self::$namespace);
+                }
+                // parsing label_count values
+                if (array_key_exists('label_count', $args)) {
+                    $args['label_count'] = _n_noop(
+                        $args['label_count'][0],
+                        $args['label_count'][1],
+                        self::$namespace
+                    );
+                }
+                // post status registration
+                register_post_status($postStatus, $args);
+            }
+
+            // add post status when a post have it
+            if (is_admin()) {
+                add_action('display_post_states', [__CLASS__, 'displayStatusLabelToPost']);
+                add_action('admin_footer-edit.php', [__CLASS__, 'addCustomPostStatusToQuickEdit']);
+                add_action('admin_footer-post.php', [__CLASS__, 'addCustomPostStatusToEdit']);
             }
         }
     }
