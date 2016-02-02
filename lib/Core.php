@@ -688,6 +688,7 @@ class Core
                 add_action('display_post_states', [__CLASS__, 'displayStatusLabelToPost']);
                 add_action('admin_footer-edit.php', [__CLASS__, 'addCustomPostStatusToQuickEdit']);
                 add_action('admin_footer-post.php', [__CLASS__, 'addCustomPostStatusToEdit']);
+                add_action('admin_footer-post-new.php', [__CLASS__, 'addCustomPostStatusToEdit']);
             }
         }
     }
