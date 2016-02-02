@@ -77,9 +77,9 @@ class CleanUp
             $manifest = json_decode($file, true);
 
             if (array_key_exists('theme-features', $manifest)
-                && array_key_exists('theme-features', $manifest['cleanup'])
+                && array_key_exists('cleanup', $manifest['theme-features'])
             ) {
-                $configuration = $manifest['cleanup'];
+                $configuration = $manifest['theme-features']['cleanup'];
             }
         }
 

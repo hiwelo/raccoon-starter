@@ -20,7 +20,11 @@
   },
   "theme-features": {
     "comments": false,
-    "widget": false
+    "widget": false,
+    "cleanup": {
+      "admin": true,
+      "security": true
+    }
   },
   "navigations": {
     "primary": "Main navigation",
