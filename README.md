@@ -114,12 +114,12 @@ For each new created class, you may need to regenerate the `./vendor/autoload.ph
 composer autoload
 ```
 
-### **[Raccoon](https://github.com/hiwelo/raccoon/)** loves PEAR Coding Standards
+### **[Raccoon](https://github.com/hiwelo/raccoon/)** loves PSR-2 Coding Standards and documentation
 When a raccoon work, he likes to make sure his work can be understood by all. So he writes scripts which are conform to standards used by the PHP community.
 
-**[Raccoon](https://github.com/hiwelo/raccoon/)** uses [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php) for its tests.
-Each modification must make a successful _PEAR_ syntax check to be committed.
-So, keep in mind that scripts documentation is required by [PEAR Coding Standards](https://pear.php.net/manual/en/standards.php)!
+**[Raccoon](https://github.com/hiwelo/raccoon/)** uses [PSR-2 Coding Standards](http://www.php-fig.org/psr/psr-2/) for its tests.
+Each modification must make a successful _PSR-2_ syntax check to be committed.
+So, Raccoon have got just a little modification : scripts documentation is required by the `ruleset.xml` for _PHP CS_ validation.
 
 You can run at any time a test control on all PHP & JavaScript files with:
 ```
