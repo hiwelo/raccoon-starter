@@ -27,8 +27,7 @@
     "require-dev": {
       "squizlabs/php_codesniffer": "^2.5",
       "symfony/debug": "^3.0",
-      "phpdocumentor/phpdocumentor": "^2.8",
-      "symfony/var-dumper": "^3.0"
+      "phpdocumentor/phpdocumentor": "^2.8"
     },
     "autoload": {
       "psr-4": {
