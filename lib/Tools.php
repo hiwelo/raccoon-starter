@@ -48,19 +48,4 @@ class Tools
 
         return $value;
     }
-
-    /**
-     * Return a path to a specific asset type directory
-     *
-     * @param string $assets_type type of assets to return path
-     *
-     * @return string
-     *
-     * @link   https://codex.wordpress.org/Function_Reference/get_template_directory
-     * @static
-     */
-    public static function assets_dir($assets_type)
-    {
-        return esc_url(get_template_directory_uri()). '/assets/dist/' . $assets_type;
-    }
 }
