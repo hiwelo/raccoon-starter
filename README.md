@@ -24,6 +24,7 @@
     - [Post Types](#post-types)
       - [Create a custom post type](#create-a-custom-post-type)
       - [Post type unregistration](#post-type-unregistration)
+    - [Post Status](#post-status)
     - [Sidebars](#sidebars)
     - [Widgets](#widgets)
   - [Third part features](#third-part-features)
@@ -274,6 +275,37 @@ You just have to add in your `manifest.json`:
 ```
 
 For example if you want to register the same post type as the [_WordPress_ documentation](https://codex.wordpress.org/Function_Reference/register_post_type#_edit_link), you have to update `manifest.json` like that:
+
+### Post Status
+With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up custom post status with the `manifest.json` file.
+Each custom post status will be automatically added into each admin panel page inside post status selectboxes.
+
+Each custom post status can have all arguments described for the [WordPress `register_post_status()` method](https://codex.wordpress.org/Function_Reference/register_post_status).
+
+For example, if you want to register a new custom post status, you have to update `manifest.json` like that:
+```json
+{
+  "post-status": {
+    "archive": {
+      "label": "Archive",
+      "exclude_from_search": false,
+      "public": false,
+      "internal": false,
+      "protected": true,
+      "private": false,
+      "publicly_queryable": false,
+      "show_in_admin_all_list": true,
+      "show_in_admin_status_list": true,
+      "_builtin": true,
+      "label_count": [
+        "Archive <span class=\"count\">(%s)</span>",
+        "Archives <span class=\"count\">(%s)</span>"
+      ]
+    }
+  }
+}
+```
+Good to know, you can't declare in `manifest.json` a custom post status named _remove_.
 
 ### Sidebars
 With **[Raccoon](https://github.com/hiwelo/raccoon/)**, you can easily set up sidebars with the `manifest.json` file.
