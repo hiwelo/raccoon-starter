@@ -23,7 +23,8 @@
     "widget": false,
     "cleanup": {
       "admin": true,
-      "security": true
+      "security": true,
+      "themes": true
     }
   },
   "navigations": {
