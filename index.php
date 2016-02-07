@@ -11,4 +11,5 @@
  * @link     https://codex.wordpress.org/Template_Hierarchy
  */
 
-get_template_part('header');
+// get_template_part('header');
+// $raccoon = new Raccoon();
