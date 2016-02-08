@@ -77,6 +77,9 @@ class Raccoon
 
         // declare all navigations
         $this->loadNavigations();
+
+        // declare all post status
+        $this->loadPostStatus();
     }
 
     /**
@@ -262,6 +265,154 @@ class Raccoon
 
             foreach ($navigations as $location => $description) {
                 register_nav_menu($location, __($description, $this->namespace));
+            }
+        }
+    }
+
+    /**
+     * Register custom post status
+     *
+     * @global object $post data from the current post in the WordPress loop
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/__/
+     * @link https://developer.wordpress.org/reference/functions/_n_noop/
+     * @link https://developer.wordpress.org/reference/functions/add_action/
+     * @link https://developer.wordpress.org/reference/functions/get_query_var/
+     * @link https://developer.wordpress.org/reference/functions/is_admin/
+     * @link https://developer.wordpress.org/reference/functions/register_post_status/
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::$namespace
+     */
+    private function loadPostStatus()
+    {
+        if (array_key_exists('post-status', $this->manifest)) {
+            // we parse namespace for further uses in anonymous functions
+            $namespace = $this->namespace;
+
+            // getting all custom post status in the manifest
+            $customPostStatus = $this->manifest['post-status'];
+
+            // getting all informations about the current post
+            global $post;
+
+            // if exists, remove post status asked to unregistration
+            if (array_key_exists('remove', $customPostStatus)) {
+                unset($customPostStatus['remove']);
+            }
+
+            foreach ($customPostStatus as $postStatus => $args) {
+                // parsing labels value
+                if (array_key_exists('label', $args)) {
+                    $args['label'] = _x($args['label'], 'post', $namespace);
+                }
+
+                // parsing label-count values
+                if (array_key_exists('label_count', $args)) {
+                    $args['label_count'] = _n_noop(
+                        $args['label_count'][0],
+                        $args['label_count'][1],
+                        $namespace
+                    );
+                }
+
+                // post status registration
+                register_post_status($postStatus, $args);
+
+                // if we're in an admin panel, we do some actions
+                if (is_admin()) {
+                    // add label status to a post in the admin panel list if this
+                    // status is in the custom status list
+                    add_action(
+                        'display_post_states',
+                        function ($statuses) use ($namespace, $postStatus, $args, $post) {
+                            if (get_query_var('post_status' !== $postStatus)
+                                && $post->post_Status === $postStatus
+                            ) {
+                                return [__($args['label'], $namespace)];
+                            }
+                        }
+                    );
+
+                    // add custom post status to quick edit select box
+                    add_action(
+                        'admin_footer-edit.php',
+                        function () use ($namespace, $postStatus, $args) {
+                            echo "
+                                <script>
+                                    jQuery(document).ready(function () {
+                                        jQuery('select[name=\"_status\"]').append(<option value=\"" .
+                                        $postStatus .
+                                        "\">" .
+                                        __($args['label'], $namespace) .
+                                        "</option>');
+                                    });
+                                </script>
+                            ";
+                        }
+                    );
+
+                    // add custom post status to edit page select box
+                    add_action(
+                        'admin_footer-post.php',
+                        function () use ($namespace, $postStatus, $args, $post) {
+                            if ($post->post_status === $postStatus) {
+                                $complete = ' selected="selected"';
+                                $label = '<span id="post-status-display"> ' .
+                                         __($args['label'], $namespace) .
+                                         '</span>';
+                            }
+
+                            echo "
+                                <script>
+                                    jQuery(document).ready(function () {
+                                        jQuery('select#post_status').append('
+                                            <option value\"" .
+                                            $status .
+                                            "\" " .
+                                            $complete .
+                                            ">" .
+                                            __($args['label'], $namespace) .
+                                            "</option>
+                                        ');
+                                        jQuery('.misc-pub-section label').append('" . $label . "');
+                                    }):
+                                </script>
+                            ";
+                        }
+                    );
+
+                    // add custom post status to new page select box
+                    add_action(
+                        'admin_footer-post-new.php',
+                        function () use ($namespace, $postStatus, $args, $post) {
+                            if ($post->post_status === $status) {
+                                $complete = ' selected="selected"';
+                                $label = '<span id="post-status-display"> ' .
+                                         __($args['label'], $namespace) .
+                                         '</span>';
+                            }
+
+                            echo "
+                                <script>
+                                    jQuery(document).ready(function () {
+                                        jQuery('select#post_status').append('
+                                            <option value=\"" .
+                                            $status .
+                                            "\" " .
+                                            $complete .
+                                            ">" .
+                                            __($args['label'], $namespace) .
+                                            "</option>
+                                        ');
+                                        jQuery('.misc-pub-section label').append('" . $label . "');
+                                    });
+                                </script>
+                            ";
+                        }
+                    );
+                }
             }
         }
     }
