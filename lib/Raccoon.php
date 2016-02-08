@@ -79,6 +79,8 @@ class Raccoon
         $this->loadCustomPostTypes();
         // declare all sidebars
         $this->loadSidebars();
+        // declare all widgets
+        $this->loadWidgets();
     }
 
     /**
@@ -507,6 +509,25 @@ class Raccoon
                 }
                 // sidebar registration
                 register_sidebar($args);
+            }
+        }
+    }
+
+    /**
+     * Register all widgets from the manifest.
+     * Each declared widget must have a specific Widget class
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/register_widget/
+     * @uses Raccoon::$manifest
+     */
+    private function loadWidgets()
+    {
+        if (array_key_exists('widgets', $this->manifest)) {
+            $widgets = $this->manifest['widgets'];
+            foreach ($widgets as $widget) {
+                register_widget($widget);
             }
         }
     }
