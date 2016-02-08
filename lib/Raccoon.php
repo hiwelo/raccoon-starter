@@ -82,6 +82,8 @@ class Raccoon
         $this->loadSidebars();
         // declare all widgets
         $this->loadWidgets();
+        // declare custom contact methods
+        $this->loadContactMethods();
     }
 
     /**
@@ -573,6 +575,48 @@ class Raccoon
             foreach ($widgets as $widget) {
                 register_widget($widget);
             }
+        }
+    }
+
+    /**
+     * Register and unregister custom contact methods
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/add_filter/
+     * @uses Raccoon::$manifest
+     */
+    private function loadContactMethods()
+    {
+        if (array_key_exists('contact-methods', $this->manifest)) {
+            if (array_key_exists('remove', $this->manifest['contact-methods'])) {
+                $methodsToRemove = $this->manifest['contact-methods']['remove'];
+                $methodsToAdd = $this->manifest['contact-methods'];
+                unset($methodsToAdd['remove']);
+            } else {
+                $methodsToRemove = [];
+                $methodsToAdd = $this->manifest['contact-methods'];
+            }
+
+            add_filter(
+                'user_contactmethods',
+                function ($contactMethods) use ($methodsToAdd, $methodsToRemove)
+                {
+                    if (count($methodsToAdd)) {
+                        foreach ($methodsToAdd as $id => $method) {
+                            $contactMethods[$id] = $method;
+                        }
+                    }
+
+                    if (count($methodsToRemove)) {
+                        foreach ($methodsToRemove as $method) {
+                            unset($contactMethods[$method]);
+                        }
+                    }
+
+                    return $contactMethods;
+                }
+            );
         }
     }
 }
