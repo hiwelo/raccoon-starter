@@ -77,6 +77,8 @@ class Raccoon
         $this->loadPostStatus();
         // declare all custom post status
         $this->loadCustomPostTypes();
+        // declare all sidebars
+        $this->loadSidebars();
     }
 
     /**
@@ -476,6 +478,35 @@ class Raccoon
                 }
                 // custom post type registration
                 register_post_type($postType, $args);
+            }
+        }
+    }
+
+    /**
+     * Register all sidebars from the manifest
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/__/
+     * @link https://developer.wordpress.org/reference/functions/register_sidebar/
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::$namespace
+     */
+    private function loadSidebars()
+    {
+        if (array_key_exists('sidebars', $this->manifest)) {
+            $sidebars = $this->manifest['sidebars'];
+
+            foreach ($sidebars as $args) {
+                // parsing arguments to add translation for some keys
+                foreach ($args as $key => $value) {
+                    $i18nKeys = ['name', 'description'];
+                    if (in_array($key, $i18nKeys)) {
+                        $args[$key] = __($value, $this->namespace);
+                    }
+                }
+                // sidebar registration
+                register_sidebar($args);
             }
         }
     }
