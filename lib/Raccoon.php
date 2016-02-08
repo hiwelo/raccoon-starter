@@ -62,6 +62,18 @@ class Raccoon
         if (!$this->loadManifest($file)) {
             return;
         }
+
+        // load environment status
+        $this->loadEnvironmentStatus();
+
+        // load namespace if a specific one is specified
+        $this->loadNamespace();
+
+        // declare all theme features
+        $this->loadThemeSupports();
+
+        // declare all navigations
+        $this->loadNavigations();
     }
 
     /**
@@ -110,5 +122,124 @@ class Raccoon
         $this->manifest = json_decode($file, true);
 
         return true;
+    }
+
+    /**
+     * Load the namespace specific information from the manifest
+     *
+     * @return boolean true if a namespace is specified, false otherwise
+     *
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::$namespace
+     */
+    private function loadNamespace()
+    {
+        if (array_key_exists('namespace', $this->manifest)) {
+            if (empty($this->manifest['namespace'])) {
+                return false;
+            }
+
+            $this->namespace = $this->manifest['namespace'];
+            return true;
+        }
+    }
+
+    /**
+     * Search environment status if avanlable and apply specific methods
+     *   1. first in $_ENV
+     *   2. if non available, in manifest.json (environment-status and env-status)
+     *   3. if non available, environment status is set at `production`
+     *
+     * @global array $_ENV Environment variables
+     *
+     * @return void
+     *
+     * @uses Raccoon::$environment
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::loadDebugMethod()
+     */
+    private function loadEnvironmentStatus()
+    {
+        // we load a specific environment status from the environment or the manifest
+        if (array_key_exists('WP_ENV', $_ENV)) {
+            $this->environment = $_ENV['WP_ENV'];
+        } elseif (array_key_exists('environment-status', $this->manifest)) {
+            $this->environment = $this->manifest['environment-status'];
+        } elseif (array_key_exists('env-status', $this->manifest)) {
+            $this->environment = $this->manifest['env-status'];
+        }
+
+        switch ($this->environment) {
+            case "development":
+                $this->loadDebugMethod();
+                break;
+        }
+    }
+
+    /**
+     * Run all development environment status specific methods
+     *
+     * @return void
+     *
+     * @uses Raccoon::$environment
+     * @uses \Symfony\Component\Debug\Debug::enable()
+     */
+    private function loadDebugMethod()
+    {
+        if ($this->environment === 'development') {
+            // Symfony OOP debug librairy
+            Debug::enable();
+        }
+    }
+
+    /**
+     * Declare all features asked in the manifest
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/add_theme_support/
+     * @uses Raccoon::$manifest
+     */
+    private function loadThemeSupports()
+    {
+        if (array_key_exists('theme-support', $this->manifest)) {
+            $supports = $this->manifest['theme-support'];
+
+            foreach ($supports as $key => $value) {
+                Tools::parseBooleans($value);
+
+                switch (gettype($value)) {
+                    case "boolean":
+                        if ($value === true) {
+                            add_theme_support($key);
+                        }
+                        break;
+
+                    default:
+                        add_theme_support($key, $value);
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Register all navigations trom the manifest
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/register_nav_menu/
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::$namespace
+     */
+    private function loadNavigations()
+    {
+        if (array_key_exists('navigations', $this->manifest)) {
+            $navigations = $this->manifest['navigations'];
+
+            foreach ($navigations as $location => $description) {
+                register_nav_menu($location, __($description, $this->namespace));
+            }
+        }
     }
 }
