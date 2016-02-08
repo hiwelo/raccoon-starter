@@ -77,6 +77,7 @@ class Raccoon
         $this->loadPostStatus();
         // declare all custom post status
         $this->loadCustomPostTypes();
+        $this->removePostTypes();
         // declare all sidebars
         $this->loadSidebars();
         // declare all widgets
@@ -480,6 +481,47 @@ class Raccoon
                 }
                 // custom post type registration
                 register_post_type($postType, $args);
+            }
+        }
+    }
+
+    /**
+     * Remove post types asked for unregistration in the manifest file
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/add_action/
+     * @link https://developer.wordpress.org/reference/functions/remove_menu_page/
+     * @uses Raccoon::$manifest
+     */
+    private function removePostTypes()
+    {
+        // get all register post types
+        global $wp_post_types;
+
+        if (array_key_exists('post-types', $this->manifest)
+            && array_key_exists('remove', $this->manifest['post-types'])
+        ) {
+            $postTypes = $this->manifest['post-types']['remove'];
+
+            foreach ($postTypes as $postType) {
+                // get post type name to remove from admin menu bar
+                $itemName = $wp_post_types[$postType]->name;
+                // unregister asked post type
+                unset($wp_post_types[$postType]);
+                // remove asked post type from admin menu bar
+                if ($itemPost === 'post') {
+                    $itemURL = 'edit.php';
+                } else {
+                    $itemURL = 'edit.php?post_type=' . $itemName;
+                }
+                // register item menu to remove
+                add_action(
+                    'admin_menu',
+                    function () use ($itemURL) {
+                        remove_menu_page($itemURL);
+                    }
+                );
             }
         }
     }
