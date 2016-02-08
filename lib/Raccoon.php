@@ -69,6 +69,9 @@ class Raccoon
         // load namespace if a specific one is specified
         $this->loadNamespace();
 
+        // load internationalization if exists
+        $this->i18nReady();
+
         // declare all theme features
         $this->loadThemeSupports();
 
@@ -190,6 +193,26 @@ class Raccoon
             // Symfony OOP debug librairy
             Debug::enable();
         }
+    }
+
+    /**
+     * Theme translation activation (with .po & .mo files)
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/load_theme_textdomain/
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::$namespace
+     */
+    private function i18nReady()
+    {
+        if (array_key_exists('languages-directory', $this->manifest)) {
+            $i18nDirectory = get_template_directory() . $this->manifest['languages-directory'];
+        } else {
+            $i18nDirectory = get_template_directory() . '/languages';
+        }
+
+        load_theme_textdomain($this->namespace, $i18nDirectory);
     }
 
     /**
