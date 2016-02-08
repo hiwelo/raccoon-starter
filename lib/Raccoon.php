@@ -488,6 +488,8 @@ class Raccoon
     /**
      * Remove post types asked for unregistration in the manifest file
      *
+     * @global array $wp_post_types registered post types informations
+     *
      * @return void
      *
      * @link https://developer.wordpress.org/reference/functions/add_action/
