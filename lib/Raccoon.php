@@ -600,8 +600,7 @@ class Raccoon
 
             add_filter(
                 'user_contactmethods',
-                function ($contactMethods) use ($methodsToAdd, $methodsToRemove)
-                {
+                function ($contactMethods) use ($methodsToAdd, $methodsToRemove) {
                     if (count($methodsToAdd)) {
                         foreach ($methodsToAdd as $id => $method) {
                             $contactMethods[$id] = $method;
