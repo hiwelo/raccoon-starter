@@ -618,4 +618,21 @@ class Raccoon
             );
         }
     }
+
+    /**
+     * Load WordPress mess cleanup class if asked in the manifest
+     *
+     * @return void
+     *
+     * @uses Hwlo\Raccoon\CleanUp
+     * @uses Raccoon::$manifest
+     */
+    private function loadCleanUp()
+    {
+        if (array_key_exists('theme-features', $this->manifest)
+            && array_key_exists('cleanup', $this->manifest['theme-features'])
+        ) {
+            $clean = new CleanUp($this->manifest['theme-features']['cleanup']);
+        }
+    }
 }
