@@ -65,21 +65,18 @@ class Raccoon
 
         // load environment status
         $this->loadEnvironmentStatus();
-
         // load namespace if a specific one is specified
         $this->loadNamespace();
-
         // load internationalization if exists
         $this->i18nReady();
-
         // declare all theme features
         $this->loadThemeSupports();
-
         // declare all navigations
         $this->loadNavigations();
-
         // declare all post status
         $this->loadPostStatus();
+        // declare all custom post status
+        $this->loadCustomPostTypes();
     }
 
     /**
@@ -413,6 +410,72 @@ class Raccoon
                         }
                     );
                 }
+            }
+        }
+    }
+
+    /**
+     * Register all custom post types from the manifest
+     *
+     * @return void
+     *
+     * @link https://developer.wordpress.org/reference/functions/__/
+     * @link https://developer.wordpress.org/reference/functions/_x/
+     * @link https://developer.wordpress.org/reference/functions/register_post_type/
+     * @uses Raccoon::$manifest
+     * @uses Raccoon::$namespace
+     */
+    private function loadCustomPostTypes()
+    {
+        if (array_key_exists('post-types', $this->manifest)) {
+            $customPostTypes = $this->manifest['post-types'];
+
+            // if exists, remove post type asked to unregistration
+            unset($customPostTypes['remove']);
+
+            foreach ($customPostTypes as $postType => $args) {
+                // parsing labels value
+                if (array_key_exists('labels', $args)) {
+                    $labels = $args['labels'];
+
+                    // keys which required a gettext with translation
+                    $contextKeys = [
+                        'name' => 'post type general name',
+                        'singular_name' => 'post type singular name',
+                        'menu_name' => 'admin menu',
+                        'name_admin_bar' => 'add new on admin bar',
+                    ];
+                    $contextKeysList = array_keys($contextKeys);
+
+                    foreach ($labels as $key => $value) {
+                        if (in_array($key, $contextKeysList)) {
+                            $labels[$key] = _x(
+                                $value,
+                                $contextKeys[$key],
+                                $this->namespace
+                            );
+                        } else {
+                            $labels[$key] = __($value, $this->namespace);
+                        }
+                    }
+                }
+                // parsing label value
+                if (array_key_exists('label', $args)) {
+                    $args['label'] = __($args['label'], $this->namespace);
+                }
+                // parsing description value
+                if (array_key_exists('description', $args)) {
+                    $args['description'] = __($args['description'], $this->namespace);
+                }
+                // replace "true" string value by a real boolean
+                $stringBooleans = array_keys($args, "true");
+                if ($stringBooleans) {
+                    foreach ($stringBooleans as $key) {
+                        $args[$key] = true;
+                    }
+                }
+                // custom post type registration
+                register_post_type($postType, $args);
             }
         }
     }
