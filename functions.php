@@ -22,5 +22,3 @@ require 'vendor/autoload.php';
  */
 // Core::setup();
 $raccoon = new Raccoon();
-
-var_dump($raccoon);

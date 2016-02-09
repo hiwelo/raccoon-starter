@@ -516,7 +516,7 @@ class Raccoon
                 // unregister asked post type
                 unset($wp_post_types[$postType]);
                 // remove asked post type from admin menu bar
-                if ($itemPost === 'post') {
+                if ($postType === 'post') {
                     $itemURL = 'edit.php';
                 } else {
                     $itemURL = 'edit.php?post_type=' . $itemName;
