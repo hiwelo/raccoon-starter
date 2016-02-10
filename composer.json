@@ -21,8 +21,15 @@
       "issues": "https://github.com/hiwelo/raccoon/issues",
       "source": "https://github.com/hiwelo/raccoon/"
     },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/hiwelo/raccoon-plugin"
+      }
+    ],
     "require": {
-      "composer/installers": "~1.0"
+      "composer/installers": "~1.0",
+        "hiwelo/raccoon-plugin": "^0.1.1"
     },
     "require-dev": {
       "squizlabs/php_codesniffer": "^2.5",
@@ -31,29 +38,10 @@
     },
     "autoload": {
       "psr-4": {
-        "Hwlo\\Raccoon\\": "./lib/"
+        "Hwlo\\Raccoon\\": ""
       }
     },
     "scripts": {
-      "pre-install-cmd": [
-        "git pull"
-      ],
-      "post-install-cmd": [
-        "bash contrib/setup.sh",
-        "npm install || true",
-        "composer dump-autoload --optimize"
-      ],
-      "pre-update-cmd": [
-        "git pull"
-      ],
-      "post-update-cmd": [
-        "bash contrib/setup.sh",
-        "npm update || true",
-        "composer dump-autoload --optimize"
-      ],
-      "autoload": [
-        "composer dump-autoload --optimize"
-      ],
       "test": [
         "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ . || true",
         "jshint --reporter=node_modules/jshint-stylish --exclude-path=.gitignore . || true"
