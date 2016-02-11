@@ -30,7 +30,6 @@ Temporary Items
 .apdisk
 
 # Composer
-composer.lock
 composer.phar
 vendor/
 

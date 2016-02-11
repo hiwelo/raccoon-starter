@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e9546f09e124ac81105757a62ed81e88",
-    "content-hash": "e1882845d31c563d9883c0dfac54faa0",
+    "hash": "64f546cd68a946c8af6ded3c73358dbc",
+    "content-hash": "1d4d19590f740cdef0e5f0789685ddc8",
     "packages": [
         {
             "name": "composer/installers",
@@ -104,73 +104,6 @@
                 "zikula"
             ],
             "time": "2016-01-27 12:54:22"
-        },
-        {
-            "name": "hiwelo/raccoon-plugin",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hiwelo/raccoon-plugin.git",
-                "reference": "5b2af0561e4cf61dc422e79d4ca448748f0301f1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hiwelo/raccoon-plugin/zipball/5b2af0561e4cf61dc422e79d4ca448748f0301f1",
-                "reference": "5b2af0561e4cf61dc422e79d4ca448748f0301f1",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0.12",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpdocumentor/phpdocumentor": "^2.8",
-                "squizlabs/php_codesniffer": "^2.5",
-                "symfony/debug": "^3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Hiwelo\\Raccoon\\": ""
-                },
-                "exclude-from-classmap": [
-                    "./Tests/"
-                ]
-            },
-            "scripts": {
-                "test": [
-                    "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ . || true"
-                ],
-                "phpcbf": [
-                    "./vendor/squizlabs/php_codesniffer/scripts/phpcbf --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ ."
-                ],
-                "documentation": [
-                    "./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d . -t ./docs/api/ --ignore=vendor/,docs/,node_modules/"
-                ]
-            },
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Damien Senger",
-                    "email": "hi@hiwelo.co",
-                    "homepage": "https://hiwelo.co",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Raccoon methods used to easily manage WordPress projects with a json configuration file",
-            "homepage": "https://github.com/hiwelo/raccoon-plugin",
-            "keywords": [
-                "library",
-                "raccoon",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/hiwelo/raccoon-plugin/issues",
-                "source": "https://github.com/hiwelo/raccoon-plugin"
-            },
-            "time": "2016-02-10 01:16:47"
         }
     ],
     "packages-dev": [
@@ -2525,32 +2458,32 @@
         },
         {
             "name": "zendframework/zend-i18n",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-i18n.git",
-                "reference": "509271eb7947e4aabebfc376104179cffea42696"
+                "reference": "41c8bf1ed8eb5e81e30b666f2477ecd4d162c645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-i18n/zipball/509271eb7947e4aabebfc376104179cffea42696",
-                "reference": "509271eb7947e4aabebfc376104179cffea42696",
+                "url": "https://api.github.com/repos/zendframework/zend-i18n/zipball/41c8bf1ed8eb5e81e30b666f2477ecd4d162c645",
+                "reference": "41c8bf1ed8eb5e81e30b666f2477ecd4d162c645",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
-                "zendframework/zend-stdlib": "~2.5"
+                "php": "^5.5 || ^7.0",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "1.7.*",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-cache": "~2.5",
-                "zendframework/zend-config": "~2.5",
-                "zendframework/zend-eventmanager": "~2.5",
-                "zendframework/zend-filter": "~2.5",
-                "zendframework/zend-servicemanager": "~2.5",
-                "zendframework/zend-validator": "~2.5",
-                "zendframework/zend-view": "~2.5"
+                "zendframework/zend-cache": "^2.5",
+                "zendframework/zend-config": "^2.6",
+                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
+                "zendframework/zend-filter": "^2.6.1",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+                "zendframework/zend-validator": "^2.5",
+                "zendframework/zend-view": "^2.5"
             },
             "suggest": {
                 "ext-intl": "Required for most features of Zend\\I18n; included in default builds of PHP",
@@ -2558,7 +2491,7 @@
                 "zendframework/zend-config": "Zend\\Config component",
                 "zendframework/zend-eventmanager": "You should install this package to use the events in the translator",
                 "zendframework/zend-filter": "You should install this package to use the provided filters",
-                "zendframework/zend-resources": "Translation resources",
+                "zendframework/zend-i18n-resources": "Translation resources",
                 "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
                 "zendframework/zend-validator": "You should install this package to use the provided validators",
                 "zendframework/zend-view": "You should install this package to use the provided view helpers"
@@ -2566,8 +2499,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -2584,7 +2517,7 @@
                 "i18n",
                 "zf2"
             ],
-            "time": "2015-06-03 15:32:01"
+            "time": "2016-02-10 22:29:02"
         },
         {
             "name": "zendframework/zend-json",

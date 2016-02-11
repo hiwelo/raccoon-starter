@@ -1,5 +1,5 @@
 {
-    "name": "hiwelo/raccoon",
+    "name": "hiwelo/raccoon-starter",
     "description": "Raccoon is a personal wordpress starter theme based on NPM, Babel ES-2015, Gulp and Knacss",
     "type": "wordpress-theme",
     "keywords" : [
@@ -7,29 +7,22 @@
       "starter theme",
       "raccoon"
     ],
-    "homepage": "https://github.com/hiwelo/raccoon",
+    "homepage": "https://github.com/hiwelo/raccoon-starter",
     "license": "GPL-3.0",
     "authors": [
         {
             "name": "Damien Senger",
             "email": "hi@hiwelo.co",
-            "homepage": "https://hiwelo.co/",
+            "homepage": "https://github.com/hiwelo",
             "role": "Developer"
         }
     ],
     "support": {
-      "issues": "https://github.com/hiwelo/raccoon/issues",
-      "source": "https://github.com/hiwelo/raccoon/"
+      "issues": "https://github.com/hiwelo/raccoon-starter/issues",
+      "source": "https://github.com/hiwelo/raccoon-starter"
     },
-    "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://github.com/hiwelo/raccoon-plugin"
-      }
-    ],
     "require": {
-      "composer/installers": "~1.0",
-        "hiwelo/raccoon-plugin": "^0.1.1"
+      "composer/installers": "~1.0"
     },
     "require-dev": {
       "squizlabs/php_codesniffer": "^2.5",
@@ -38,17 +31,17 @@
     },
     "autoload": {
       "psr-4": {
-        "Hwlo\\Raccoon\\": "./lib/"
+        "Hiwelo\\Theme": "./lib/"
       }
     },
     "scripts": {
       "test": [
-        "./vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ . || true",
+        "./bin/phpcs --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ . || true",
         "jshint --reporter=node_modules/jshint-stylish --exclude-path=.gitignore . || true"
       ],
-      "phpcbf": ["./vendor/squizlabs/php_codesniffer/scripts/phpcbf --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ ."],
+      "phpcbf": ["./bin/phpcbf --extensions=php --standard=ruleset.xml --ignore=vendor/,docs/,node_modules/ ."],
       "documentation": [
-        "./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d . -t ./docs/api/ --ignore=vendor/,docs/,node_modules/"
+        "./bin/phpdoc -d . -t ./docs/api/ --ignore=vendor/,docs/,node_modules/"
       ],
       "work": [
         "npm start"
