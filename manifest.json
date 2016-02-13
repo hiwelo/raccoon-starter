@@ -30,12 +30,7 @@
   "production": {
     "admin-menu": {
       "remove": [
-        "upload.php",
-        {
-          "tools.php": [
-            "import.php"
-          ]
-        }
+        "tools.php"
       ]
     }
   },
