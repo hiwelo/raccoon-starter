@@ -27,6 +27,17 @@
       "themes": true
     }
   },
+  "production": {
+    "admin-menu": {
+      "remove": [
+        {
+          "plugins.php": [
+            "plugin-install.php"
+          ]
+        }
+      ]
+    }
+  },
   "navigations": {
     "primary": "Main navigation",
     "social": "Social links"
