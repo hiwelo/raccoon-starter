@@ -20,6 +20,7 @@
   },
   "theme-features": {
     "all-settings": true,
+    "thumbnail-in-lists": true,
     "comments": false,
     "widget": false,
     "cleanup": {
