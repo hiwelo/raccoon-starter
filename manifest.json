@@ -19,6 +19,7 @@
     ]
   },
   "theme-features": {
+    "all-settings": true,
     "comments": false,
     "widget": false,
     "cleanup": {
