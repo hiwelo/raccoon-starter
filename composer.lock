@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "42aa1369990b3168656ab77d5037fd4f",
-    "content-hash": "1d4d19590f740cdef0e5f0789685ddc8",
+    "hash": "bc608451e9917a952702d97f3871ea1c",
+    "content-hash": "ae2c203084002e9d2e447c800c035a17",
     "packages": [
         {
             "name": "composer/installers",
@@ -1611,63 +1611,6 @@
             "time": "2016-01-14 08:33:16"
         },
         {
-            "name": "symfony/debug",
-            "version": "v3.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/debug.git",
-                "reference": "29606049ced1ec715475f88d1bbe587252a3476e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/29606049ced1ec715475f88d1bbe587252a3476e",
-                "reference": "29606049ced1ec715475f88d1bbe587252a3476e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "psr/log": "~1.0"
-            },
-            "conflict": {
-                "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
-            },
-            "require-dev": {
-                "symfony/class-loader": "~2.8|~3.0",
-                "symfony/http-kernel": "~2.8|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Debug\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Debug Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-01-27 05:14:46"
-        },
-        {
             "name": "symfony/event-dispatcher",
             "version": "v2.8.2",
             "source": {
@@ -2181,16 +2124,16 @@
         },
         {
             "name": "zendframework/zend-cache",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-cache.git",
-                "reference": "2196a5851f4618609c1afb3b9a29267b57ac7be6"
+                "reference": "e2f62aaf4a8f884060483921a8d6d39d9087705d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-cache/zipball/2196a5851f4618609c1afb3b9a29267b57ac7be6",
-                "reference": "2196a5851f4618609c1afb3b9a29267b57ac7be6",
+                "url": "https://api.github.com/repos/zendframework/zend-cache/zipball/e2f62aaf4a8f884060483921a8d6d39d9087705d",
+                "reference": "e2f62aaf4a8f884060483921a8d6d39d9087705d",
                 "shasum": ""
             },
             "require": {
@@ -2240,7 +2183,7 @@
                 "cache",
                 "zf2"
             ],
-            "time": "2016-02-11 23:09:08"
+            "time": "2016-02-12 16:26:56"
         },
         {
             "name": "zendframework/zend-config",
