@@ -24,17 +24,15 @@
     "comments": false,
     "widget": false,
     "js-detection": true,
-    "cleanup": {
-      "admin": true,
-      "security": true,
-      "themes": true,
-      "wp_head": true
-    }
+    "cleanup": true
   },
   "production": {
     "admin-menu": {
       "remove": [
-        "tools.php"
+        "tools.php",
+        {
+          "themes.php": ["nav-menus.php"]
+        }
       ]
     }
   },
