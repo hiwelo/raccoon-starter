@@ -23,6 +23,7 @@
     "thumbnail-in-lists": true,
     "comments": false,
     "widget": false,
+    "js-detection": true,
     "cleanup": {
       "admin": true,
       "security": true,
