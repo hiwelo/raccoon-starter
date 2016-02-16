@@ -11,6 +11,8 @@
  * @link     https://codex.wordpress.org/Template_Hierarchy
  */
 
+use Hiwelo\Raccoon\Theme\Helpers;
+
 // navigation arguments
 $navigation = [
     'theme_location' => 'primary',
@@ -21,7 +23,6 @@ $navigation = [
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
     <?php wp_head(); ?>
-    <link rel="stylesheet" media="all" href="<?php echo ModernWeb::stylesheet(); ?>">
 </head>
 <body>
     <header class="header">

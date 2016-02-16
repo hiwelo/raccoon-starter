@@ -28,17 +28,22 @@ class Helpers
     /**
      * Helper's construct method, call all private methods
      *
+     * @param string $file main stylesheet name
+     *
      * @return false
      *
      * @since 1.0.0
      * @uses  Helpers::addCharset()
      * @uses  Helpers::addViewport()
      */
-    public function __construct()
+    public function __construct($file = null)
     {
         // add generic meta into wp_head() (viewport + charset)
         $this->addCharset();
         $this->addViewport();
+
+        // add a link to the main theme stylesheet into wp_head()
+        $this->addStylesheet();
     }
 
     /**
@@ -70,6 +75,27 @@ class Helpers
         add_action('wp_head', function () {
             $output = "<meta name=\"viewport\" content\"width=device-width, initial-scale=1, shrink-to-fit=no\">";
             echo $output;
+        });
+    }
+
+    /**
+     * Return URL to the main stylesheet
+     *
+     * @param string $file main stylesheet name
+     *
+     * @return string main stylesheet url
+     *
+     * @link  https://developer.wordpress.org/reference/functions/get_template_directory_uri
+     * @since 1.0.0
+     */
+    private function addStylesheet($file = 'styles.css')
+    {
+        $template_uri = get_template_directory_uri();
+        $css_dir = '/assets/dist/css/';
+        $output = $template_uri . $css_dir . $file;
+
+        add_action('wp_head', function () use ($output) {
+            echo "<link rel\"stylesheet\" media=\"all\" href=\"" . $output . "\">";
         });
     }
 }

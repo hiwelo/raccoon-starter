@@ -11,5 +11,5 @@
  * @link     https://codex.wordpress.org/Template_Hierarchy
  */
 
-get_header();
-get_footer();
+get_template_part('tpl/header');
+get_template_part('tpl/footer');
