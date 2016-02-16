@@ -10,7 +10,7 @@
  * @license  https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3.0
  * @link     https://codex.wordpress.org/Widgets_API
  */
-namespace Hiwelo\Theme;
+namespace Hiwelo\Raccoon\Theme;
 
 /**
  * Example widget class
