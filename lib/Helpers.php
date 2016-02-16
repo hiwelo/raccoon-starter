@@ -95,7 +95,7 @@ class Helpers
         $output = $template_uri . $css_dir . $file;
 
         add_action('wp_head', function () use ($output) {
-            echo "<link rel\"stylesheet\" media=\"all\" href=\"" . $output . "\">";
+            echo "<link rel=\"stylesheet\" media=\"all\" href=\"" . $output . "\">";
         });
     }
 }
