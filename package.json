@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/hiwelo/raccoon#readme",
   "dependencies": {
-    "jquery": "^2.1.4",
+    "jquery": "^3.2.1",
     "knacss": "^4.3.6"
   },
   "devDependencies": {
